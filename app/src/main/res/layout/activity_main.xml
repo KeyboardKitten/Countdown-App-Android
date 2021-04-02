@@ -4,7 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/mainRelativeLayout"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit_icon"
+        android:contentDescription="Edit countdown timer"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|right"
+        app:rippleColor="@color/colorPrimaryDark"
+        />
+
+    </FrameLayout>
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -95,4 +116,7 @@
         android:id="@+id/buttonDatePicker"
         />
 
+
+
 </RelativeLayout>
+
