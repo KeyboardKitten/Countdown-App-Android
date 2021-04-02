@@ -1,6 +1,7 @@
 package com.example.countdownappversionsecondaprilsurface;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = findViewById(R.id.mainToolBar);
+        setSupportActionBar(myToolbar);
 
         Button btnDatePicker = findViewById(R.id.buttonDatePicker);
 
