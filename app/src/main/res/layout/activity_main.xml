@@ -41,6 +41,7 @@
         android:layout_above="@id/Counter"
         android:textAlignment="center"
         android:gravity="center_horizontal"
+        android:textSize="@dimen/mainActivityHeaders"
         />
 
 
@@ -60,7 +61,9 @@
     app:suffixMinute="m"
     app:suffixSecond="s"
     app:suffixGravity="bottom"
-    app:suffixTextSize="12sp"
+    app:suffixTextSize="30sp"
+    app:timeTextSize="40sp"
+    android:padding="@dimen/activity_digits"
     />
 
     <TextView
@@ -70,6 +73,7 @@
         android:layout_below="@+id/Counter"
         android:layout_centerInParent="true"
         android:id="@+id/countingDownText"
+        android:textSize="@dimen/mainActivityHeaders"
         />
 
     <TextView
@@ -79,6 +83,7 @@
         tools:text="DatePicker"
         android:layout_below="@+id/countingDownText"
         android:layout_centerInParent="true"
+        android:textSize="@dimen/mainActivityHeaders"
         />
 
     <Button
