@@ -74,7 +74,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_main_loginButton"
+        android:id="@+id/countdownEditSaveBUtton"
         android:text="Save"
         android:textSize="22sp"
         />
