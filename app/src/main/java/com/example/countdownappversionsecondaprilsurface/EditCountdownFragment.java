@@ -21,6 +21,7 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
         View v = inflater.inflate(R.layout.countdownedit_main, container, false);
 
         AppCompatButton btnDatePicker = v.findViewById(R.id.buttonDatePicker);
+        AppCompatButton saveButton = v.findViewById(R.id.countdownEditSaveBUtton);
         getChildFragmentManager();
         // https://developer.android.com/reference/androidx/fragment/app/Fragment#getFragmentManager()
         // Double check Fragment Manager has been removed
@@ -31,12 +32,20 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
                 datePicker.show(getChildFragmentManager(), "date picker");
             }
         });
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.changeFragment(new CountdownFragment(), "Countdown Fragment");
+            }
+        });
 
         return v;
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.onDateSet(view, year, month, dayOfMonth);
     }
 }
