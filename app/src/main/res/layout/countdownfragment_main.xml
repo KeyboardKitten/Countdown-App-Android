@@ -13,7 +13,7 @@
         >
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fabEditIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_edit_icon"
@@ -78,13 +78,6 @@
         android:textSize="@dimen/mainActivityHeaders"
         />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="32dp"
-        android:text="Date Picker"
-        android:id="@+id/buttonDatePicker"
-        />
+
 
 </RelativeLayout>
