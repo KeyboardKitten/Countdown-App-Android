@@ -3,6 +3,8 @@ package com.example.countdownappversionsecondaprilsurface;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -24,19 +26,34 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar myToolbar = findViewById(R.id.mainToolBar);
-        setSupportActionBar(myToolbar);
-
-        Button btnDatePicker = findViewById(R.id.buttonDatePicker);
-
-        btnDatePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
-            }
-        });
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_container, new CountdownFragment())
+                .commit();
     }
+//
+//    public void dateSetting(DatePicker view, int year, int month, int dayOfMonth){
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.YEAR, year);
+//        calendar.set(Calendar.MONTH, month);
+//        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//
+//        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+//        TextView tvDatePicker = findViewById(R.id.dateContext);
+//        CountdownView myCountdownView = findViewById(R.id.Counter);
+//
+//        try {
+//            tvDatePicker.setText(pickerDateString);
+//            Date now = new Date();
+//
+//            long currentDate = now.getTime();
+//            long pickerDate = calendar.getTimeInMillis();
+//            long countDownToPickerDate = pickerDate - currentDate;
+//            myCountdownView.start(countDownToPickerDate);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -61,4 +78,14 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             e.printStackTrace();
         }
     }
+
+    public void changeFragment(Fragment fragment, String backstacktag){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_container, fragment)
+                .addToBackStack(backstacktag)
+                .commit();
+    }
+
+
 }
