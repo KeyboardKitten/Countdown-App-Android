@@ -52,15 +52,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:text="Date picker"
+        android:text="Date Selection"
         />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Date Picker"
+        android:text="Local Date Selection"
         android:id="@+id/buttonDatePicker"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Select From Public Holiday"
+        android:id="@+id/buttonAPIHoliday"
         />
 
     <Button
