@@ -31,6 +31,29 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 .replace(R.id.main_fragment_container, new CountdownFragment())
                 .commit();
     }
+//
+//    public void dateSetting(DatePicker view, int year, int month, int dayOfMonth){
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.YEAR, year);
+//        calendar.set(Calendar.MONTH, month);
+//        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//
+//        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+//        TextView tvDatePicker = findViewById(R.id.dateContext);
+//        CountdownView myCountdownView = findViewById(R.id.Counter);
+//
+//        try {
+//            tvDatePicker.setText(pickerDateString);
+//            Date now = new Date();
+//
+//            long currentDate = now.getTime();
+//            long pickerDate = calendar.getTimeInMillis();
+//            long countDownToPickerDate = pickerDate - currentDate;
+//            myCountdownView.start(countDownToPickerDate);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
