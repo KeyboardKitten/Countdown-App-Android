@@ -22,6 +22,8 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
 
         AppCompatButton btnDatePicker = v.findViewById(R.id.buttonDatePicker);
         AppCompatButton saveButton = v.findViewById(R.id.countdownEditSaveBUtton);
+        AppCompatButton holidayAPIButton = v.findViewById(R.id.buttonAPIHoliday);
+
         getChildFragmentManager();
         // https://developer.android.com/reference/androidx/fragment/app/Fragment#getFragmentManager()
         // Double check Fragment Manager has been removed
@@ -32,11 +34,20 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
                 datePicker.show(getChildFragmentManager(), "date picker");
             }
         });
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.changeFragment(new CountdownFragment(), "Countdown Fragment");
+            }
+        });
+
+        holidayAPIButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.changeFragment(new PublicHolidaysFragment(), "Public Holiday Fragment");
             }
         });
 
