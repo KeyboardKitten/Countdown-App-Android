@@ -3,6 +3,8 @@ package com.example.countdownappversionsecondaprilsurface;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_container, new CountdownFragment())
+                .commit();
     }
 
     @Override
@@ -49,4 +55,14 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             e.printStackTrace();
         }
     }
+
+    public void changeFragment(Fragment fragment, String backstacktag){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_container, fragment)
+                .addToBackStack(backstacktag)
+                .commit();
+    }
+
+
 }
