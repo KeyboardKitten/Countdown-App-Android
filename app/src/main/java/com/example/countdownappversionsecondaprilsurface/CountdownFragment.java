@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class CountdownFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     private String daysCheck;
+    private TextView eventNameBox;
 
 
     @Nullable
@@ -34,6 +37,9 @@ public class CountdownFragment extends Fragment implements DatePickerDialog.OnDa
     View v = inflater.inflate(R.layout.countdownfragment_main, container, false);
 
     daysCheck = getString(R.string.isShowDayString);
+    eventNameBox = v.findViewById(R.id.nameOfEventTextBox);
+
+    
 
 //    onCheckboxClicked(v);
 

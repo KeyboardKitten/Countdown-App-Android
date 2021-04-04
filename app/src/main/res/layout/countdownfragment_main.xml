@@ -34,6 +34,7 @@
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:textSize="@dimen/mainActivityHeaders"
+        android:id="@+id/nameOfEventTextBox"
         />
 
 

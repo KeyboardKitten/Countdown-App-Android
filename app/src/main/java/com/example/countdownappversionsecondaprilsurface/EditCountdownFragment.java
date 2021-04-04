@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 public class EditCountdownFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     SharedPreferences sp;
+    AppCompatEditText textbox;
 
     @Nullable
     @Override
