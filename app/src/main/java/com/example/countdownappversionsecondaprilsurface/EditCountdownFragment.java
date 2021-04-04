@@ -54,7 +54,7 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.changeFragment(new CountdownFragment(), "Countdown Fragment");
+                mainActivity.changeFragment(new CountdownFragment(sp), "Countdown Fragment");
                 String textboxContents = textbox.getText().toString();
 
                 sp.edit().putString("textboxText", textboxContents).apply();

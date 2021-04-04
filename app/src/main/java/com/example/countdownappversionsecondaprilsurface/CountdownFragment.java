@@ -1,6 +1,7 @@
 package com.example.countdownappversionsecondaprilsurface;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
@@ -29,6 +30,11 @@ public class CountdownFragment extends Fragment implements DatePickerDialog.OnDa
 
     private String daysCheck;
     private TextView eventNameBox;
+    private SharedPreferences sp;
+
+    public CountdownFragment(SharedPreferences sp) {
+        this.sp = sp;
+    }
 
 
     @Nullable
@@ -50,6 +56,7 @@ public class CountdownFragment extends Fragment implements DatePickerDialog.OnDa
         public void onClick(View v) {
             MainActivity mainActivity = (MainActivity) getActivity();
             mainActivity.changeFragment(new EditCountdownFragment(), "edit countdown");
+
         }
     });
 
