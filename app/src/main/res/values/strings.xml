@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Countdown App</string>
+    <string name="name_of_event">Name of Event</string>
+    <string name="isShowDayString">true</string>
+    <string name="isShowHourString">true</string>
+    <string name="isShowMinuteString">true</string>
+    <string name="isShowSecondsString">true</string>
+    <string name="isShowMillieSecString">false</string>
 </resources>
