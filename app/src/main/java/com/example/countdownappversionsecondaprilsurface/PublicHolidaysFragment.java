@@ -33,6 +33,7 @@ public class PublicHolidaysFragment extends Fragment {
     private RequestQueue requestQueue;
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> events;
 
     @Nullable
     @Override
@@ -43,12 +44,7 @@ public class PublicHolidaysFragment extends Fragment {
         if (context == null) return v;
 
         listView = v.findViewById(R.id.holidayAPIListView);
-        arrayAdapter = new ArrayAdapter<String>(
-                context,
-                android.R.layout.simple_list_item_1,
-                new ArrayList<String>()
-        );
-        listView.setAdapter(arrayAdapter);
+
 
         requestQueue = Volley.newRequestQueue(getContext());
 
@@ -98,6 +94,8 @@ public class PublicHolidaysFragment extends Fragment {
 //
 //        requestQueue.add(jsonObjectRequest);
 
+        events = new ArrayList<>();
+
         fetchDataAndUpdateList(
                 url,
                 new Response.Listener<JSONObject>() {
@@ -105,18 +103,43 @@ public class PublicHolidaysFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         Log.d("TEST","onResponse Started");
                         try {
-                            JSONArray events = response.getJSONArray("events");
-                            System.out.println(events);
-                            int l = events.length();
-                            for (int i=0; i < l; i++) {
-                                JSONObject obj = events.getJSONObject(i);
-                                arrayAdapter.add(obj.getString("title"));
+                            JSONObject englandAndWales = response.getJSONObject("england-and-wales");
+                            JSONArray eventsJSON = englandAndWales.getJSONArray("events");
+                            Log.d("jsonnn derulo", String.valueOf(eventsJSON));
+                            for (int i = 0; i < eventsJSON.length(); i++) {
+                                Log.d("viruss", String.valueOf(i));
+                                JSONObject event = eventsJSON.getJSONObject(i);
+                                Log.d("Alex is a sstupid",event.toString());
+                                Log.d("Alex is a ",event.getString("title"));
+                                events.add(event.getString("title"));
+                                String[] eventsArray = new String[events.size()];
+                                eventsArray = events.toArray(eventsArray);
+                                arrayAdapter = new ArrayAdapter<String>(
+                                        getContext(),
+                                        android.R.layout.simple_list_item_1,
+                                        eventsArray
+                                );
+
+
+
+                                Log.d("ArrayAdapter", arrayAdapter.toString());
+                                Log.d("ArrayAdapter", listView.toString());
+                                listView.setAdapter(arrayAdapter);
+
                             }
+
+//                            System.out.println(events);
+//                            int l = events.length();
+//                            for (int i=0; i < l; i++) {
+//                                JSONObject obj = events.getJSONObject(i);
+//                                arrayAdapter.add(obj.getString("title"));
+//                            }
                         } catch (JSONException e) {
                             Log.d("ERROR","JSON Error");
                         }
                     }
                 });
+
 
         return v;
     }
