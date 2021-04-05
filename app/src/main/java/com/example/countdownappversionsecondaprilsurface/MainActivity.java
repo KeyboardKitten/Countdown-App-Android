@@ -128,13 +128,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.menu_nav_a){
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_fragment_container, new EditCountdownFragment())
-                    .commit();
+            changeFragment(new CountdownFragment(), "Countdown View main");
+        } else if (id == R.id.menu_nav_b){
+            changeFragment(new EditCountdownFragment(), "Edit Countdown Fragment");
         }
-        else if (id == R.id.menu_nav_b){
+        else if (id == R.id.menu_nav_c){
             // Create how to use fragment.
         }
 
