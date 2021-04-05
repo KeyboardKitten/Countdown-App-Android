@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,8 @@ import cn.iwgang.countdownview.CountdownView;
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +56,32 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         NavigationView navigationView = findViewById(R.id.nav_panel);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.main_fragment_container, new CountdownFragment())
                 .commit();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_goto:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 //
 //    public void dateSetting(DatePicker view, int year, int month, int dayOfMonth){
 //        Calendar calendar = Calendar.getInstance();
