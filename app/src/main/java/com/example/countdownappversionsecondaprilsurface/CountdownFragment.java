@@ -36,6 +36,10 @@ public class CountdownFragment extends Fragment implements DatePickerDialog.OnDa
         this.sp = sp;
     }
 
+    public CountdownFragment() {
+        this.sp = sp;
+    }
+
 
     @Nullable
     @Override
