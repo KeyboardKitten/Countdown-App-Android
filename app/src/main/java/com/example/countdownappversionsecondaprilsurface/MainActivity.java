@@ -1,8 +1,10 @@
 package com.example.countdownappversionsecondaprilsurface;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -10,10 +12,13 @@ import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -21,7 +26,7 @@ import java.util.Date;
 
 import cn.iwgang.countdownview.CountdownView;
 
-public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
 
@@ -44,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_panel);
+        navigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -106,5 +114,34 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 .commit();
     }
 
+    @Override
+    public void onBackPressed() {
 
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else  {
+            super.onBackPressed();
+        }
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_nav_a){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_fragment_container, new EditCountdownFragment())
+                    .commit();
+        }
+        else if (id == R.id.menu_nav_b){
+            // Create how to use fragment.
+        }
+
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+
+        return false;
+    }
 }
