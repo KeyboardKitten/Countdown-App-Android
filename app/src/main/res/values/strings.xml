@@ -6,4 +6,6 @@
     <string name="isShowMinuteString">true</string>
     <string name="isShowSecondsString">true</string>
     <string name="isShowMillieSecString">false</string>
+    <string name="nav_open">Nav drawer open</string>
+    <string name="nav_drawer_closed">Nav drawer closed</string>
 </resources>

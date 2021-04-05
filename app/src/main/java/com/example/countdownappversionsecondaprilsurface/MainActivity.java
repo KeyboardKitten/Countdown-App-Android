@@ -1,7 +1,9 @@
 package com.example.countdownappversionsecondaprilsurface;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,6 +23,8 @@ import cn.iwgang.countdownview.CountdownView;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
+    private DrawerLayout drawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +32,18 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
         Toolbar toolbar = findViewById(R.id.mainToolBar);
         setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.main_nav_drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                toolbar,
+                (R.string.nav_open),
+                (R.string.nav_drawer_closed)
+        );
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
