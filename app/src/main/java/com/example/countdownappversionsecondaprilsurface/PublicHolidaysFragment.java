@@ -111,7 +111,7 @@ public class PublicHolidaysFragment extends Fragment {
                                 JSONObject event = eventsJSON.getJSONObject(i);
                                 Log.d("Alex is a sstupid",event.toString());
                                 Log.d("Alex is a ",event.getString("title"));
-                                events.add(event.getString("title"));
+                                events.add(event.getString("title") + " " +  event.getString("date"));
                                 String[] eventsArray = new String[events.size()];
                                 eventsArray = events.toArray(eventsArray);
                                 arrayAdapter = new ArrayAdapter<String>(
