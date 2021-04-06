@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <include layout="@layout/activity_main" />
+
+    <!-- TODO(10)
+    Note that as well as having a DrawerLayout, we also need a NavigationView element, which
+    is the actual menu. See the lecture slides for more information, or the documentation.
+
+    Importantly, as well as styling attributes, this element has two elements that define the
+    layout to use as the "header" above the list of menu items (see layout/activity_main_drawer.xml).
+    Additionally, it also defines the menu resource to use (see menu/activity_main_drawer.xml).
+    -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/nav_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
