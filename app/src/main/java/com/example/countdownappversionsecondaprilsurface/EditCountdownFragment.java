@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,10 +18,13 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class EditCountdownFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     SharedPreferences sp;
     AppCompatEditText textbox;
+    private TextView eventNameBox;
 
     @Nullable
     @Override
@@ -32,10 +36,14 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
 
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
 
+        eventNameBox = v.findViewById(R.id.nameOfEventTextBox);
+
         AppCompatButton btnDatePicker = v.findViewById(R.id.buttonDatePicker);
         AppCompatButton saveButton = v.findViewById(R.id.countdownEditSaveBUtton);
         AppCompatButton holidayAPIButton = v.findViewById(R.id.buttonAPIHoliday);
         final AppCompatEditText textbox = v.findViewById(R.id.countDownNameEditBox);
+
+
 
         textbox.setText(sp.getString("textboxText", ""));
 
@@ -55,9 +63,15 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.changeFragment(new CountdownFragment(sp), "Countdown Fragment");
-                String textboxContents = textbox.getText().toString();
+//                String textboxContents = textbox.getText().toString();
+//
+//                sp.edit().putString("textboxText", textboxContents).apply();
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("nameofCount", MODE_PRIVATE).edit();
+                editor.putString("nameofCount", textbox.getText().toString());
+                editor.apply();
 
-                sp.edit().putString("textboxText", textboxContents).apply();
+//                eventNameBox.setText(sharedPreferences.getString("nameofCount", "Orange is the new black"));
+
             }
         });
 

@@ -1,6 +1,7 @@
 package com.example.countdownappversionsecondaprilsurface;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Debug;
@@ -48,6 +49,16 @@ public class CountdownFragment extends Fragment implements DatePickerDialog.OnDa
 
     daysCheck = getString(R.string.isShowDayString);
     eventNameBox = v.findViewById(R.id.nameOfEventTextBox);
+
+    SharedPreferences sharedPreferences = getContext().getSharedPreferences("nameofCount", Context.MODE_PRIVATE);
+
+    Log.d("sharedPreferences hun", sharedPreferences.getString("nameofCount", "Nowt here"));
+
+    eventNameBox.setText(sharedPreferences.getString("nameofCount", "No Countdown Name entered"));
+
+//        System.out.println("hello" + eventNameBox.getText().toString());
+
+    Log.d("sharedPreferences2", (String) eventNameBox.getText());
 
     
 
