@@ -111,11 +111,14 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        System.out.println(pickerDateString);
+        // Works up to here
         TextView tvDatePicker = findViewById(R.id.dateContext);
         CountdownView myCountdownView = findViewById(R.id.Counter);
 
         try {
             tvDatePicker.setText(pickerDateString);
+            // Picker date string is not the issue
             Date now = new Date();
 
             long currentDate = now.getTime();

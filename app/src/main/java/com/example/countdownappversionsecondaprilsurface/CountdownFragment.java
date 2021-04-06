@@ -27,7 +27,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class CountdownFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+public class CountdownFragment extends Fragment {
 
     private String daysCheck;
     private TextView eventNameBox;
@@ -80,10 +80,6 @@ public class CountdownFragment extends Fragment implements DatePickerDialog.OnDa
     return v;
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-    }
 
 //    public void onCheckboxClicked(View view) {
 //        // Is the view now checked?
