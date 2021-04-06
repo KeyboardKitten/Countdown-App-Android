@@ -27,11 +27,15 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import cn.iwgang.countdownview.CountdownView;
+
 public class CountdownFragment extends Fragment {
 
     private String daysCheck;
     private TextView eventNameBox;
     private SharedPreferences sp;
+    private TextView dateDisplayer;
+    private CountdownView counterDowner;
 
     public CountdownFragment(SharedPreferences sp) {
         this.sp = sp;
@@ -46,6 +50,9 @@ public class CountdownFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.countdownfragment_main, container, false);
+
+    dateDisplayer = v.findViewById(R.id.dateContext);
+    counterDowner = v.findViewById(R.id.Counter);
 
     daysCheck = getString(R.string.isShowDayString);
     eventNameBox = v.findViewById(R.id.nameOfEventTextBox);
@@ -74,6 +81,8 @@ public class CountdownFragment extends Fragment {
 
         }
     });
+
+
 
 
 

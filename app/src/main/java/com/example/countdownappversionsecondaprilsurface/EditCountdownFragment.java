@@ -3,6 +3,9 @@ package com.example.countdownappversionsecondaprilsurface;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.DialogFragment;
@@ -33,10 +37,14 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class EditCountdownFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
+    EditCountdownFragment(String pickerDateString){
+        this.pickerDateString = pickerDateString;
+    }
+
     SharedPreferences sp;
     AppCompatEditText textbox;
     private TextView eventNameBox;
-    TextView tvDatePicker;
+    TextView tvDatePickerEdit;
     CountdownView myCountdownView;
     CheckBox DaysCheckBox;
     CheckBox HoursCheckBox;
@@ -47,6 +55,16 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
     ProgressBar progressBar;
     int count=0;
     Timer timer;
+    String pickerDateString;
+    DatePicker view;
+    int year;
+    int month;
+    int dayOfMonth;
+
+    private DatePickerDialog.OnDateSetListener datePickerDialog;
+
+    public EditCountdownFragment() {
+    }
 
     @Nullable
     @Override
@@ -64,19 +82,16 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
         AppCompatButton saveButton = v.findViewById(R.id.countdownEditSaveBUtton);
         AppCompatButton holidayAPIButton = v.findViewById(R.id.buttonAPIHoliday);
         final AppCompatEditText textbox = v.findViewById(R.id.countDownNameEditBox);
-        TextView tvDatePicker = v.findViewById(R.id.dateContext);
+
+        final TextView tvDatePickerEdit = v.findViewById(R.id.dateContext);
         CountdownView myCountdownView = v.findViewById(R.id.Counter);
-        DaysCheckBox = v.findViewById(R.id.checkBoxDays);
-        HoursCheckBox = v.findViewById(R.id.checkBoxHours);
-        MinutesCheckBox = v.findViewById(R.id.checkBoxMinutes);
-        SecondsCheckBox = v.findViewById(R.id.checkBoxSeconds);
-        MillisecondsCheckBox = v.findViewById(R.id.checkBoxMillieSeconds);
+
         final String daysCheckBoxTextTrue = getActivity().getResources().getString(R.string.isShowDayString);
         final String daysCheckBoxTextFalse = getActivity().getResources().getString(R.string.isShowDayString);
 
         final LoadingDialog loadingDialog = new LoadingDialog(getActivity());
 
-        progressBar = v.findViewById(R.id.progressBar);
+//        progressBar = v.findViewById(R.id.progressBar);
 
 
 
@@ -86,10 +101,19 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
         // https://developer.android.com/reference/androidx/fragment/app/Fragment#getFragmentManager()
         // Double check Fragment Manager has been removed
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getChildFragmentManager(), "date picker");
+//                Calendar cal = Calendar.getInstance();
+//                int year = cal.get(Calendar.YEAR);
+//                int month = cal.get(Calendar.MONTH);
+//                int day = cal.get(Calendar.DAY_OF_MONTH);
+//
+//                DatePickerDialog dialog = new DatePickerDialog(getActivity(), android.R.style.Theme_Holo_Dialog_MinWidth, datePickerDialog, year,month,day);
+//
+//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             }
         });
 
@@ -113,18 +137,18 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
         holidayAPIButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timer=new Timer();
-                TimerTask timerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        count++;
-                        progressBar.setProgress(count);
-                        if (count==100){
-                            timer.cancel();
-                        }
-                    }
-                };
-                timer.schedule(timerTask, 0, 100);
+//                timer=new Timer();
+//                TimerTask timerTask = new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        count++;
+//                        progressBar.setProgress(count);
+//                        if (count==100){
+//                            timer.cancel();
+//                        }
+//                    }
+//                };
+//                timer.schedule(timerTask, 0, 100);
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.changeFragment(new PublicHolidaysFragment(), "Public Holiday Fragment");
             }
@@ -143,31 +167,55 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
 //            }
 //        });
 
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+//        mainActivity.onDateSet(DatePicker v, int year, int month, int dayOfMonth);
+
+        mainActivity.onDateSet(view, year, month, dayOfMonth);
+//        {
+//            try {
+//                tvDatePicker.setText(pickerDateString);
+//                System.out.println(pickerDateString);
+//                Log.d("datePickerStuff", tvDatePicker.getText().toString());
+//                Date now = new Date();
+//
+//                long currentDate = now.getTime();
+//                long pickerDate = calendar.getTimeInMillis();
+//                long countDownToPickerDate = pickerDate - currentDate;
+//                myCountdownView.start(countDownToPickerDate);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+
+
+
         return v;
     }
 
-
-
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-
-        try {
-            tvDatePicker.setText(pickerDateString);
-            Log.d("datePickerStuff", tvDatePicker.getText().toString());
-            Date now = new Date();
-
-            long currentDate = now.getTime();
-            long pickerDate = calendar.getTimeInMillis();
-            long countDownToPickerDate = pickerDate - currentDate;
-            myCountdownView.start(countDownToPickerDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
+
+
+//    @Override
+////    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+////
+//////        try {
+//////            tvDatePicker.setText(pickerDateString);
+//////            System.out.println(pickerDateString);
+//////            Log.d("datePickerStuff", tvDatePicker.getText().toString());
+//////            Date now = new Date();
+//////
+//////            long currentDate = now.getTime();
+//////            long pickerDate = calendar.getTimeInMillis();
+//////            long countDownToPickerDate = pickerDate - currentDate;
+//////            myCountdownView.start(countDownToPickerDate);
+//////        } catch (Exception e) {
+//////            e.printStackTrace();
+//////        }
+////    }
+
 }
