@@ -31,7 +31,23 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     private DrawerLayout drawerLayout;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_goto:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +79,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 .replace(R.id.main_fragment_container, new CountdownFragment())
                 .commit();
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.action_goto:
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 //
 //    public void dateSetting(DatePicker view, int year, int month, int dayOfMonth){
 //        Calendar calendar = Calendar.getInstance();
