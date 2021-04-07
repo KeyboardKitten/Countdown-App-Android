@@ -2,6 +2,7 @@ package com.example.countdownappversionsecondaprilsurface;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Debug;
@@ -27,9 +28,15 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import cn.iwgang.countdownview.CountdownView;
 
-public class CountdownFragment extends Fragment {
+import static android.content.Context.MODE_PRIVATE;
+
+public class CountdownFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private String daysCheck;
     private TextView eventNameBox;
@@ -52,6 +59,8 @@ public class CountdownFragment extends Fragment {
 
     dateDisplayer = v.findViewById(R.id.dateContext);
     CountdownView counterDowner = v.findViewById(R.id.Counter);
+
+//    v.findViewById(R.id.action_goto_share_countdown).setOnClickListener(this);
 
     daysCheck = getString(R.string.isShowDayString);
     eventNameBox = v.findViewById(R.id.nameOfEventTextBox);
@@ -103,6 +112,66 @@ public class CountdownFragment extends Fragment {
 
 
     return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+//        int id = v.getId();
+//
+//        Intent i = null;
+//        switch (id) {
+//            case R.id.action_goto_share_countdown:
+//                i = new Intent(Intent.ACTION_SEND);
+//                i.putExtra(Intent.EXTRA_TEXT, "Testing ana oop");
+//                i.setType("text/plain");
+//                break;
+//        }
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+//                calendar.set(Calendar.YEAR, year);
+//                calendar.get(Calendar.YEAR);
+        Log.d("Dates", String.valueOf(year));
+//                calendar.set(Calendar.MONTH, month);
+        month = calendar.get(Calendar.MONTH);
+        Log.d("Dates", String.valueOf(month));
+//                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        Log.d("Dates", String.valueOf(dayOfMonth));
+
+
+        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        Log.d("Dates", pickerDateString);
+        try {
+            TextView tvDatePickerEdit = null;
+//            tvDatePicker.setText(pickerDateString);
+//            Log.d("datePickerStuff", tvDatePicker.getText().toString());
+            Date now = new Date();
+//                    tvDatePickerEdit.setText(pickerDateString);
+//                    System.out.println("HELLO " + pickerDateString);
+//                    System.out.print("tvDatePickerEdit" + pickerDateString);
+            long currentDate = now.getTime();
+            Log.d("Dates", String.valueOf(currentDate));
+            long pickerDate = calendar.getTimeInMillis();
+            Log.d("Dates", String.valueOf(pickerDate));
+            long countDownToPickerDate = pickerDate - currentDate;
+            Log.d("Dates", String.valueOf(countDownToPickerDate));
+            SharedPreferences.Editor editorForDates = getContext().getSharedPreferences("DateDifference", MODE_PRIVATE).edit();
+            editorForDates.putLong("EditDate", countDownToPickerDate);
+            editorForDates.apply();
+            Log.d("Dates", "Hello Shared Preferences One");
+//                    SharedPreferences.Editor stringDateTitle = getContext().getSharedPreferences("DateNamer", MODE_PRIVATE).edit();
+//                    stringDateTitle.putString("NamerOfDate", tvDatePickerEdit.getText().toString());
+//                    stringDateTitle.apply();
+            Log.d("Dates", "Hello Shared Preferences Two");
+//                    System.out.println("Total amount of days " + countDownToPickerDate);
+        } catch (Exception e) {
+            Log.d("Dates", e.toString());
+            e.printStackTrace();
+        }
     }
 
 

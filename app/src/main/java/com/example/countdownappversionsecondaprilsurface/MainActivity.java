@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -28,7 +30,7 @@ import java.util.Date;
 
 import cn.iwgang.countdownview.CountdownView;
 
-public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
 
@@ -40,13 +42,14 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
 
-        switch (id) {
-            case R.id.action_goto:
+        switch (item.getItemId()) {
+            case R.id.action_goto_share_countdown:
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "Testing ana oop");
+                intent.setType("text/plain");
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -169,27 +172,69 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         return false;
     }
 
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
-
-//        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-////        System.out.println(pickerDateString);
-//        TextView tvDatePicker = findViewById(R.id.dateContext);
-//        CountdownView myCountdownView = findViewById(R.id.Counter);
+//    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
+//        Calendar calendar = Calendar.getInstance();
+//        year = calendar.get(Calendar.YEAR);
+////                calendar.set(Calendar.YEAR, year);
+////                calendar.get(Calendar.YEAR);
+//        Log.d("Dates", String.valueOf(year));
+////                calendar.set(Calendar.MONTH, month);
+//        month = calendar.get(Calendar.MONTH);
+//        Log.d("Dates", String.valueOf(month));
+////                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//        dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+//        Log.d("Dates", String.valueOf(dayOfMonth));
 //
+//
+//        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+//        Log.d("Dates", pickerDateString);
 //        try {
+//            TextView tvDatePickerEdit = null;
 ////            tvDatePicker.setText(pickerDateString);
 ////            Log.d("datePickerStuff", tvDatePicker.getText().toString());
 //            Date now = new Date();
-//
+////                    tvDatePickerEdit.setText(pickerDateString);
+////                    System.out.println("HELLO " + pickerDateString);
+////                    System.out.print("tvDatePickerEdit" + pickerDateString);
 //            long currentDate = now.getTime();
+//            Log.d("Dates", String.valueOf(currentDate));
 //            long pickerDate = calendar.getTimeInMillis();
+//            Log.d("Dates", String.valueOf(pickerDate));
 //            long countDownToPickerDate = pickerDate - currentDate;
-//            System.out.println(countDownToPickerDate);
-//            myCountdownView.start(countDownToPickerDate);
+//            Log.d("Dates", String.valueOf(countDownToPickerDate));
+//            SharedPreferences.Editor editorForDates = this.getSharedPreferences("DateDifference", MODE_PRIVATE).edit();
+//            editorForDates.putLong("EditDate", countDownToPickerDate);
+//            editorForDates.apply();
+//            Log.d("Dates", "Hello Shared Preferences One");
+////                    SharedPreferences.Editor stringDateTitle = getContext().getSharedPreferences("DateNamer", MODE_PRIVATE).edit();
+////                    stringDateTitle.putString("NamerOfDate", tvDatePickerEdit.getText().toString());
+////                    stringDateTitle.apply();
+//            Log.d("Dates", "Hello Shared Preferences Two");
+////                    System.out.println("Total amount of days " + countDownToPickerDate);
 //        } catch (Exception e) {
+//            Log.d("Dates", e.toString());
 //            e.printStackTrace();
 //        }
-    }
+//
+////        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+//////        System.out.println(pickerDateString);
+////        TextView tvDatePicker = findViewById(R.id.dateContext);
+////        CountdownView myCountdownView = findViewById(R.id.Counter);
+////
+////        try {
+//////            tvDatePicker.setText(pickerDateString);
+//////            Log.d("datePickerStuff", tvDatePicker.getText().toString());
+////            Date now = new Date();
+////
+////            long currentDate = now.getTime();
+////            long pickerDate = calendar.getTimeInMillis();
+////            long countDownToPickerDate = pickerDate - currentDate;
+////            System.out.println(countDownToPickerDate);
+////            myCountdownView.start(countDownToPickerDate);
+////        } catch (Exception e) {
+////            e.printStackTrace();
+////        }
+//    }
 
 //    @Override
 //    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

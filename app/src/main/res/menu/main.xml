@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_goto"
+        android:id="@+id/action_goto_share_countdown"
         android:orderInCategory="100"
         android:title="Share countdown"
         app:showAsAction="never" />
