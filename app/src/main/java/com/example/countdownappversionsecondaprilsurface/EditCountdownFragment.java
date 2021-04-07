@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,16 +15,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -60,10 +65,20 @@ public class EditCountdownFragment extends Fragment {
     int year;
     int month;
     int dayOfMonth;
+    EditText dateOfBirthET;
+    String selectedDate;
+    public static final int REQUEST_CODE = 11;
+    private OnFragmentInteractionListener mListener;
 
     private DatePickerDialog.OnDateSetListener datePickerDialog;
 
     public EditCountdownFragment() {
+        // Empty
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Nullable
@@ -71,6 +86,7 @@ public class EditCountdownFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.countdownedit_main, container, false);
 
+        final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
         final Context context = getContext();
         if (context == null) return v;
 
@@ -105,6 +121,12 @@ public class EditCountdownFragment extends Fragment {
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getChildFragmentManager(), "date picker");
+
+
+
+
+
+
 //                Calendar cal = Calendar.getInstance();
 //                int year = cal.get(Calendar.YEAR);
 
@@ -300,5 +322,10 @@ public class EditCountdownFragment extends Fragment {
 //////            e.printStackTrace();
 //////        }
 ////    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
 
 }
