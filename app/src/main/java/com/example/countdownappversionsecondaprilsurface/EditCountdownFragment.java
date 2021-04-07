@@ -37,7 +37,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class EditCountdownFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
-    EditCountdownFragment(String pickerDateString){
+    EditCountdownFragment(String pickerDateString) {
         this.pickerDateString = pickerDateString;
     }
 
@@ -53,7 +53,7 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
     CheckBox MillisecondsCheckBox;
     String DaysTextCheckBox;
     ProgressBar progressBar;
-    int count=0;
+    int count = 0;
     Timer timer;
     String pickerDateString;
     DatePicker view;
@@ -71,7 +71,7 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.countdownedit_main, container, false);
 
-        Context context = getContext();
+        final Context context = getContext();
         if (context == null) return v;
 
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -83,8 +83,8 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
         AppCompatButton holidayAPIButton = v.findViewById(R.id.buttonAPIHoliday);
         final AppCompatEditText textbox = v.findViewById(R.id.countDownNameEditBox);
 
-        final TextView tvDatePickerEdit = v.findViewById(R.id.dateContext);
-        CountdownView myCountdownView = v.findViewById(R.id.Counter);
+
+        final CountdownView myCountdownView = v.findViewById(R.id.Counter);
 
         final String daysCheckBoxTextTrue = getActivity().getResources().getString(R.string.isShowDayString);
         final String daysCheckBoxTextFalse = getActivity().getResources().getString(R.string.isShowDayString);
@@ -92,7 +92,6 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
         final LoadingDialog loadingDialog = new LoadingDialog(getActivity());
 
 //        progressBar = v.findViewById(R.id.progressBar);
-
 
 
         textbox.setText(sp.getString("textboxText", ""));
@@ -108,12 +107,61 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
                 datePicker.show(getChildFragmentManager(), "date picker");
 //                Calendar cal = Calendar.getInstance();
 //                int year = cal.get(Calendar.YEAR);
+
 //                int month = cal.get(Calendar.MONTH);
 //                int day = cal.get(Calendar.DAY_OF_MONTH);
 //
 //                DatePickerDialog dialog = new DatePickerDialog(getActivity(), android.R.style.Theme_Holo_Dialog_MinWidth, datePickerDialog, year,month,day);
 //
 //                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                MainActivity mainActivity = (MainActivity) getActivity();
+
+//        mainActivity.onDateSet(DatePicker v, int year, int month, int dayOfMonth);
+
+                mainActivity.onDateSet(view, year, month, dayOfMonth);
+
+                Calendar calendar = Calendar.getInstance();
+                year = calendar.get(Calendar.YEAR);
+//                calendar.set(Calendar.YEAR, year);
+//                calendar.get(Calendar.YEAR);
+                Log.d("Dates", String.valueOf(year));
+//                calendar.set(Calendar.MONTH, month);
+                month = calendar.get(Calendar.MONTH);
+                Log.d("Dates", String.valueOf(month));
+//                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                Log.d("Dates", String.valueOf(dayOfMonth));
+
+
+                String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+                Log.d("Dates", pickerDateString);
+                try {
+                    TextView tvDatePickerEdit = null;
+//            tvDatePicker.setText(pickerDateString);
+//            Log.d("datePickerStuff", tvDatePicker.getText().toString());
+                    Date now = new Date();
+//                    tvDatePickerEdit.setText(pickerDateString);
+//                    System.out.println("HELLO " + pickerDateString);
+//                    System.out.print("tvDatePickerEdit" + pickerDateString);
+                    long currentDate = now.getTime();
+                    Log.d("Dates", String.valueOf(currentDate));
+                    long pickerDate = calendar.getTimeInMillis();
+                    Log.d("Dates", String.valueOf(pickerDate));
+                    long countDownToPickerDate = pickerDate - currentDate;
+                    Log.d("Dates", String.valueOf(countDownToPickerDate));
+                    SharedPreferences.Editor editorForDates = getContext().getSharedPreferences("DateDifference", MODE_PRIVATE).edit();
+                    editorForDates.putLong("EditDate", countDownToPickerDate);
+                    editorForDates.apply();
+                    Log.d("Dates", "Hello Shared Preferences One");
+//                    SharedPreferences.Editor stringDateTitle = getContext().getSharedPreferences("DateNamer", MODE_PRIVATE).edit();
+//                    stringDateTitle.putString("NamerOfDate", tvDatePickerEdit.getText().toString());
+//                    stringDateTitle.apply();
+                    Log.d("Dates", "Hello Shared Preferences Two");
+//                    System.out.println("Total amount of days " + countDownToPickerDate);
+                } catch (Exception e) {
+                    Log.d("Dates", e.toString());
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -167,11 +215,7 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
 //            }
 //        });
 
-        MainActivity mainActivity = (MainActivity) getActivity();
 
-//        mainActivity.onDateSet(DatePicker v, int year, int month, int dayOfMonth);
-
-        mainActivity.onDateSet(view, year, month, dayOfMonth);
 //        {
 //            try {
 //                tvDatePicker.setText(pickerDateString);
@@ -187,8 +231,6 @@ public class EditCountdownFragment extends Fragment implements DatePickerDialog.
 //                e.printStackTrace();
 //            }
 //        }
-
-
 
 
         return v;

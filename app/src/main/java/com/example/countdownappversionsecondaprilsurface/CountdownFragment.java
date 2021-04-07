@@ -35,7 +35,6 @@ public class CountdownFragment extends Fragment {
     private TextView eventNameBox;
     private SharedPreferences sp;
     private TextView dateDisplayer;
-    private CountdownView counterDowner;
 
     public CountdownFragment(SharedPreferences sp) {
         this.sp = sp;
@@ -52,20 +51,37 @@ public class CountdownFragment extends Fragment {
     View v = inflater.inflate(R.layout.countdownfragment_main, container, false);
 
     dateDisplayer = v.findViewById(R.id.dateContext);
-    counterDowner = v.findViewById(R.id.Counter);
+    CountdownView counterDowner = v.findViewById(R.id.Counter);
 
     daysCheck = getString(R.string.isShowDayString);
     eventNameBox = v.findViewById(R.id.nameOfEventTextBox);
 
     SharedPreferences sharedPreferences = getContext().getSharedPreferences("nameofCount", Context.MODE_PRIVATE);
+    SharedPreferences datePreference = getContext().getSharedPreferences("DateDifference", Context.MODE_PRIVATE);
+//    SharedPreferences nameOfDate = getContext().getSharedPreferences("DateNamer", Context.MODE_PRIVATE);
 
     Log.d("sharedPreferences hun", sharedPreferences.getString("nameofCount", "Nowt here"));
 
     eventNameBox.setText(sharedPreferences.getString("nameofCount", "No Countdown Name entered"));
 
+//    dateDisplayer.setText(nameOfDate.getString("NamerOfDate", "No Date"));
+
 //        System.out.println("hello" + eventNameBox.getText().toString());
 
     Log.d("sharedPreferences2", (String) eventNameBox.getText());
+
+    System.out.println("Counter down time " + datePreference.getLong("Nnnn", 0));
+
+//    Log.d("DateDifference hun", datePreference.getLong("Nnnn", 0));
+
+    Long dateSeperation = datePreference.getLong("Nnnn", 0);
+
+    System.out.println("Date Seperation " + dateSeperation);
+
+    counterDowner.start(dateSeperation);
+
+    System.out.println("Apple " + counterDowner);
+
 
     
 

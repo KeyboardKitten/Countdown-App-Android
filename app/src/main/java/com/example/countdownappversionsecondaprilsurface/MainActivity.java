@@ -170,29 +170,25 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-        System.out.println(pickerDateString);
+//        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+////        System.out.println(pickerDateString);
 //        TextView tvDatePicker = findViewById(R.id.dateContext);
-        CountdownView myCountdownView = findViewById(R.id.Counter);
-
-        try {
-//            tvDatePicker.setText(pickerDateString);
-//            Log.d("datePickerStuff", tvDatePicker.getText().toString());
-            Date now = new Date();
-
-            long currentDate = now.getTime();
-            long pickerDate = calendar.getTimeInMillis();
-            long countDownToPickerDate = pickerDate - currentDate;
-            System.out.println(countDownToPickerDate);
-            myCountdownView.start(countDownToPickerDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        CountdownView myCountdownView = findViewById(R.id.Counter);
+//
+//        try {
+////            tvDatePicker.setText(pickerDateString);
+////            Log.d("datePickerStuff", tvDatePicker.getText().toString());
+//            Date now = new Date();
+//
+//            long currentDate = now.getTime();
+//            long pickerDate = calendar.getTimeInMillis();
+//            long countDownToPickerDate = pickerDate - currentDate;
+//            System.out.println(countDownToPickerDate);
+//            myCountdownView.start(countDownToPickerDate);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 //    @Override
