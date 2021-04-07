@@ -102,8 +102,6 @@ public class EditCountdownFragment extends Fragment implements  DatePickerDialog
         final String daysCheckBoxTextTrue = getActivity().getResources().getString(R.string.isShowDayString);
         final String daysCheckBoxTextFalse = getActivity().getResources().getString(R.string.isShowDayString);
 
-        final LoadingDialog loadingDialog = new LoadingDialog(getActivity());
-
 //        progressBar = v.findViewById(R.id.progressBar);
 
 
