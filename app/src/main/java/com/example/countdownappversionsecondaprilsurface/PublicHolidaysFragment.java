@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -35,15 +39,30 @@ public class PublicHolidaysFragment extends Fragment {
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> events;
 
+
+    private LinearLayoutCompat holidayAPILoadingContainer;
+    private ContentLoadingProgressBar holidayLoadingProgress;
+
+    private LinearLayoutCompat holidayFailedContainer;
+
+    private RelativeLayout holidayAPIContainer;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.holidayapi_main, container, false);
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
 
         Context context = getContext();
         if (context == null) return v;
 
         listView = v.findViewById(R.id.holidayAPIListView);
+        this.holidayLoadingProgress = v.findViewById(R.id.progress);
+        this.holidayAPILoadingContainer = v.findViewById(R.id.holidayAPI_loading_container);
+        this.holidayFailedContainer = v.findViewById(R.id.holidayAPI_fetch_failed_container);
+        this.holidayAPIContainer = v.findViewById(R.id.holidayAPIFragment);
+
+        setLoadingUI();
+
 
 
         requestQueue = Volley.newRequestQueue(getContext());
@@ -125,7 +144,7 @@ public class PublicHolidaysFragment extends Fragment {
                                 Log.d("ArrayAdapter", arrayAdapter.toString());
                                 Log.d("ArrayAdapter", listView.toString());
                                 listView.setAdapter(arrayAdapter);
-
+                                setFetchedUI();
                             }
 
 //                            System.out.println(events);
@@ -136,6 +155,7 @@ public class PublicHolidaysFragment extends Fragment {
 //                            }
                         } catch (JSONException e) {
                             Log.d("ERROR","JSON Error");
+                            setFailedUI();
                         }
                     }
                 });
@@ -150,6 +170,7 @@ public class PublicHolidaysFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("ERROR HOLIDAYS", error.getMessage());
+                        setFailedUI();
                     }
                 });
         requestQueue.add(exampleRequest);
@@ -165,6 +186,24 @@ public class PublicHolidaysFragment extends Fragment {
     public void onPause() {
         requestQueue.stop();
         super.onPause();
+    }
+
+    private void setLoadingUI(){
+        this.holidayAPILoadingContainer.setVisibility(View.VISIBLE);
+        this.holidayFailedContainer.setVisibility(View.GONE);
+        this.holidayAPIContainer.setVisibility(View.GONE);
+    }
+
+    private void setFetchedUI(){
+        this.holidayAPIContainer.setVisibility(View.VISIBLE);
+        this.holidayFailedContainer.setVisibility(View.GONE);
+        this.holidayAPILoadingContainer.setVisibility(View.GONE);
+    }
+
+    private void setFailedUI(){
+        this.holidayAPIContainer.setVisibility(View.GONE);
+        this.holidayAPILoadingContainer.setVisibility(View.GONE);
+        this.holidayFailedContainer.setVisibility(View.VISIBLE);
     }
 
 }

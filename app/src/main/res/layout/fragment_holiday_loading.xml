@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/holidayAPI_loading_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:visibility="gone"
+    android:orientation="vertical">
+
+    <!--
+    This element is a loading graphic that is shown while the request is occurred, but has not
+    returned
+    -->
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/fab_margin"
+        android:theme="?android:attr/progressBarStyleLarge"
+        android:layout_width="48dip"
+        android:layout_height="48dip">
+    </androidx.core.widget.ContentLoadingProgressBar>
+
+    <TextView
+        android:id="@+id/FetchingHolidayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fetching public holidays from GOV.UK"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
