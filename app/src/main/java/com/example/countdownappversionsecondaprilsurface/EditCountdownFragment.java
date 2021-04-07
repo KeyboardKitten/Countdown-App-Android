@@ -40,7 +40,7 @@ import cn.iwgang.countdownview.CountdownView;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class EditCountdownFragment extends Fragment {
+public class EditCountdownFragment extends Fragment implements  DatePickerDialog.OnDateSetListener {
 
     EditCountdownFragment(String pickerDateString) {
         this.pickerDateString = pickerDateString;
@@ -60,15 +60,12 @@ public class EditCountdownFragment extends Fragment {
     ProgressBar progressBar;
     int count = 0;
     Timer timer;
-    String pickerDateString;
+    private String pickerDateString;
     DatePicker view;
     int year;
     int month;
     int dayOfMonth;
-    EditText dateOfBirthET;
     String selectedDate;
-    public static final int REQUEST_CODE = 11;
-    private OnFragmentInteractionListener mListener;
 
     private DatePickerDialog.OnDateSetListener datePickerDialog;
 
@@ -121,10 +118,6 @@ public class EditCountdownFragment extends Fragment {
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getChildFragmentManager(), "date picker");
-
-
-
-
 
 
 //                Calendar cal = Calendar.getInstance();
@@ -197,6 +190,7 @@ public class EditCountdownFragment extends Fragment {
 //                sp.edit().putString("textboxText", textboxContents).apply();
                 SharedPreferences.Editor editor = getContext().getSharedPreferences("nameofCount", MODE_PRIVATE).edit();
                 editor.putString("nameofCount", textbox.getText().toString());
+                editor.putString("nameofDate", pickerDateString);
                 editor.apply();
 
 //                eventNameBox.setText(sharedPreferences.getString("nameofCount", "Orange is the new black"));
@@ -224,38 +218,49 @@ public class EditCountdownFragment extends Fragment {
             }
         });
 
-//        DaysCheckBox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (DaysCheckBox.isChecked()){
-//                    daysCheckBoxText.replace(R.string.isShowDayStringTrue, R.string.isShowDayStringFalse);
-//                    Log.d("StringCheck", daysCheckBoxText);
-//                } else {
-//                    daysCheckBoxText.equals("false");
-//                    Log.d("StringCheck", daysCheckBoxText);
-//                }
-//            }
-//        });
 
 
-//        {
-//            try {
-//                tvDatePicker.setText(pickerDateString);
-//                System.out.println(pickerDateString);
-//                Log.d("datePickerStuff", tvDatePicker.getText().toString());
-//                Date now = new Date();
-//
-//                long currentDate = now.getTime();
-//                long pickerDate = calendar.getTimeInMillis();
-//                long countDownToPickerDate = pickerDate - currentDate;
-//                myCountdownView.start(countDownToPickerDate);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
 
 
         return v;
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        System.out.println("pickerDateString "  + pickerDateString);
+
+        SharedPreferences.Editor editor = getContext().getSharedPreferences("nameofCount", MODE_PRIVATE).edit();
+        editor.putString("nameOfDate", pickerDateString);
+        editor.apply();
+
+
+        // Valid
+
+        try {
+//            dateDisplayer.setText(pickerDateString);
+//            System.out.println("date Displayer " + dateDisplayer);
+            Date now = new Date();
+
+            long currentDate = now.getTime();
+            System.out.println("Current Date " + currentDate);
+            long pickerDate = calendar.getTimeInMillis();
+            System.out.println("Picker Date " + pickerDate);
+            long countDownToPickerDate = pickerDate - currentDate;
+            Log.d("Counter", String.valueOf(countDownToPickerDate));
+//            System.out.println("Difference " + countDownToPickerDate);
+//            counterEditor = getActivity().getSharedPreferences("counterDifference", MODE_PRIVATE).edit();
+//            counterEditor.putLong("difference", countDownToPickerDate);
+//            counterEditor.apply();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 //    @Override
@@ -323,9 +328,5 @@ public class EditCountdownFragment extends Fragment {
 //////        }
 ////    }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 
 }

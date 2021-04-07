@@ -1,5 +1,6 @@
 package com.example.countdownappversionsecondaprilsurface;
 
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -39,13 +40,14 @@ import cn.iwgang.countdownview.CountdownView;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class CountdownFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class CountdownFragment extends Fragment implements View.OnClickListener {
 
     private String daysCheck;
     private TextView eventNameBox;
     private SharedPreferences sp;
     TextView dateDisplayer;
     CountdownView counterDowner;
+    SharedPreferences.Editor counterEditor;
 
     public CountdownFragment(SharedPreferences sp) {
         this.sp = sp;
@@ -55,18 +57,15 @@ public class CountdownFragment extends Fragment implements View.OnClickListener,
         this.sp = sp;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
 
-
-
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.countdownfragment_main, container, false);
+
+
+    Context mContext= getContext();
 
         if (container == null) {
             return null;
@@ -74,24 +73,23 @@ public class CountdownFragment extends Fragment implements View.OnClickListener,
 
         RelativeLayout ii = (RelativeLayout)inflater.inflate(R.layout.countdownfragment_main, container, false);
         dateDisplayer = (TextView) ii.findViewById(R.id.dateContext);
-        counterDowner = (CountdownView) ii.findViewById(R.id.Counter);
-
-
-//    dateDisplayer = (TextView) v.findViewById(R.id.dateContext);
-//    counterDowner = (CountdownView) v.findViewById(R.id.Counter);
 
 //    v.findViewById(R.id.action_goto_share_countdown).setOnClickListener(this);
 
     daysCheck = getString(R.string.isShowDayString);
     eventNameBox = v.findViewById(R.id.nameOfEventTextBox);
+    counterDowner = v.findViewById(R.id.Counter);
+    dateDisplayer = v.findViewById(R.id.dateContext);
 
     SharedPreferences sharedPreferences = getContext().getSharedPreferences("nameofCount", Context.MODE_PRIVATE);
-    SharedPreferences datePreference = getContext().getSharedPreferences("DateDifference", Context.MODE_PRIVATE);
-//    SharedPreferences nameOfDate = getContext().getSharedPreferences("DateNamer", Context.MODE_PRIVATE);
+//    SharedPreferences datePreference = getContext().getSharedPreferences("DateDifference", Context.MODE_PRIVATE);
+//    SharedPreferences datePickerCaller = getContext().getSharedPreferences("datePickerTotalString", MODE_PRIVATE);
 
     Log.d("sharedPreferences hun", sharedPreferences.getString("nameofCount", "Nowt here"));
 
     eventNameBox.setText(sharedPreferences.getString("nameofCount", "No Countdown Name entered"));
+//    counterDowner.start(sharedPreferences.getLong("nameOfDate", 0));
+    dateDisplayer.setText(sharedPreferences.getString("nameOfDate", "No date selected"));
 
 //    dateDisplayer.setText(nameOfDate.getString("NamerOfDate", "No Date"));
 
@@ -129,7 +127,7 @@ public class CountdownFragment extends Fragment implements View.OnClickListener,
 
 
 
-    SharedPreferences prefs = getActivity().getSharedPreferences("counterDifference", MODE_PRIVATE);
+    SharedPreferences prefs = getContext().getSharedPreferences("counterDifference", Context.MODE_PRIVATE);
     Long counterOnCreate = prefs.getLong("difference", 0);
 
     Log.d("Counter", String.valueOf(counterOnCreate));
@@ -153,38 +151,43 @@ public class CountdownFragment extends Fragment implements View.OnClickListener,
 //        }
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-        System.out.println("pickerDateString"  + pickerDateString);
-
-        // Valid
-
-        try {
-//            dateDisplayer.setText(pickerDateString);
-//            System.out.println("date Displayer " + dateDisplayer);
-            Date now = new Date();
-
-            long currentDate = now.getTime();
-            System.out.println("Current Date " + currentDate);
-            long pickerDate = calendar.getTimeInMillis();
-            System.out.println("Picker Date " + pickerDate);
-            long countDownToPickerDate = pickerDate - currentDate;
-            Log.d("Counter", String.valueOf(countDownToPickerDate));
-//            System.out.println("Difference " + countDownToPickerDate);
-            SharedPreferences.Editor counterEditor = getActivity().getSharedPreferences("counterDifference", MODE_PRIVATE).edit();
-            counterEditor.putLong("difference", countDownToPickerDate);
-            counterEditor.apply();
+//    @Override
+//    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.YEAR, year);
+//        calendar.set(Calendar.MONTH, month);
+//        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//
+//        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+//        System.out.println("pickerDateString "  + pickerDateString);
+//
+////        SharedPreferences.Editor datePickerStringSP = getActivity().getSharedPreferences("datePickerString", MODE_PRIVATE).edit();
+////        datePickerStringSP.putString("datePickerStringTotal", pickerDateString);
+////        datePickerStringSP.apply();
+//
+//
+//        // Valid
+//
+//        try {
+////            dateDisplayer.setText(pickerDateString);
+////            System.out.println("date Displayer " + dateDisplayer);
+//            Date now = new Date();
+//
+//            long currentDate = now.getTime();
+//            System.out.println("Current Date " + currentDate);
+//            long pickerDate = calendar.getTimeInMillis();
+//            System.out.println("Picker Date " + pickerDate);
+//            long countDownToPickerDate = pickerDate - currentDate;
+//            Log.d("Counter", String.valueOf(countDownToPickerDate));
+////            System.out.println("Difference " + countDownToPickerDate);
+////            counterEditor = getActivity().getSharedPreferences("counterDifference", MODE_PRIVATE).edit();
+////            counterEditor.putLong("difference", countDownToPickerDate);
+////            counterEditor.apply();
 //            counterDowner.start(countDownToPickerDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 //        Calendar calendar = Calendar.getInstance();
 //        year = calendar.get(Calendar.YEAR);
 ////                calendar.set(Calendar.YEAR, year);
