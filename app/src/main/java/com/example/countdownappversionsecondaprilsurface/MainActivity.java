@@ -162,7 +162,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             changeFragment(new EditCountdownFragment(), "Edit Countdown Fragment");
         }
         else if (id == R.id.menu_nav_c){
-            // Create how to use fragment.
+            changeFragment(new HowToUseFragment(), "How to use");
+        } else if (id == R.id.menu_nav_d){
+            System.exit(0);
         }
 
 

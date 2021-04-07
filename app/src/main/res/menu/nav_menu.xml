@@ -18,5 +18,10 @@
         android:id="@+id/menu_nav_c"
         android:title="How to use"
     />
+
+    <item
+        android:id="@+id/menu_nav_d"
+        android:title="Quit App"
+    />
     </group>
 </menu>
