@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:title="Share countdown"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_goto_view_public_holidays"
+        android:orderInCategory="200"
+        android:title="View public holidays"
+        app:showAsAction="never" />
 </menu>
