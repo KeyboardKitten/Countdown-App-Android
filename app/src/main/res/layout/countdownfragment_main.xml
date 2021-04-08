@@ -20,7 +20,8 @@
             android:contentDescription="Edit countdown timer"
             android:layout_margin="16dp"
             android:layout_gravity="bottom|right"
-            app:rippleColor="@color/colorPrimaryDark"
+            app:backgroundTint="@color/colorAccent"
+            app:tint="#FFFFFF"
             />
 
     </FrameLayout>
