@@ -10,5 +10,5 @@
     <string name="nav_drawer_closed">Nav drawer closed</string>
     <string name="first_instructions">To create a new countdown, tap the edit button in the bottom right from the homescreen.</string>
     <string name="seconds_instructions">When editing your countdown you can set a name, this will show on the mainscreen to allow you to indetify your countdown. \n \nYou can either select a local date or pick a public holiday provided by Gov.UK. \n \nPressing save will return you back to the countdown view. </string>
-    <string name="third_instructions">Selecting \'Local Date Selection\' will allow you to select a date, doing this will start a countdown from a the currentdate to your chosen date.</string>
+    <string name="third_instructions">Selecting \'Local Date Selection\' will allow you to select a date from a dialog, selecting a date will start a countdown from a the current date to your chosen date.</string>
 </resources>
