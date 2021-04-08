@@ -11,9 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +32,7 @@ import java.util.Date;
 
 import cn.iwgang.countdownview.CountdownView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener {
 
     private DrawerLayout drawerLayout;
 
@@ -75,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.nav_panel);
         navigationView.setNavigationItemSelectedListener(this);
-
 
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        }
 //    }
 
-    public void changeFragment(Fragment fragment, String backstacktag){
+    public void changeFragment(Fragment fragment, String backstacktag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.main_fragment_container, fragment)
@@ -145,9 +146,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else  {
+        } else {
             super.onBackPressed();
         }
 
@@ -156,14 +157,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menu_nav_a){
+        if (id == R.id.menu_nav_a) {
             changeFragment(new CountdownFragment(), "Countdown View main");
-        } else if (id == R.id.menu_nav_b){
+        } else if (id == R.id.menu_nav_b) {
             changeFragment(new EditCountdownFragment(), "Edit Countdown Fragment");
-        }
-        else if (id == R.id.menu_nav_c){
+        } else if (id == R.id.menu_nav_c) {
             changeFragment(new HowToUseFragment(), "How to use");
-        } else if (id == R.id.menu_nav_d){
+        } else if (id == R.id.menu_nav_d) {
             System.exit(0);
         }
 
@@ -263,4 +263,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            e.printStackTrace();
 //        }
 //    }
+
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        SharedPreferences sharedPreferencesMain = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+        sharedPreferencesMain.edit().putString("nameofDate", pickerDateString).apply();
+
+
+        Log.d("pickerDateStringEntry", pickerDateString);
+
+        Log.d("pickerDateSharedPref", sharedPreferencesMain.getString("nameofDate", "nameofDateSharedPreferenceContainsNothing"));
+
+
+        // Valid
+
+        try {
+//            dateDisplayer.setText(pickerDateString);
+//            System.out.println("date Displayer " + dateDisplayer);
+            Date now = new Date();
+
+            long currentDate = now.getTime();
+            System.out.println("Current Date " + currentDate);
+            long pickerDate = calendar.getTimeInMillis();
+            System.out.println("Picker Date " + pickerDate);
+            long countDownToPickerDate = pickerDate - currentDate;
+            Log.d("Counter", String.valueOf(countDownToPickerDate));
+//            System.out.println("Difference " + countDownToPickerDate);
+//            counterEditor = getActivity().getSharedPreferences("counterDifference", MODE_PRIVATE).edit();
+//            counterEditor.putLong("difference", countDownToPickerDate);
+//            counterEditor.apply();
+            sharedPreferencesMain.edit().putLong("counterMain", countDownToPickerDate).apply();
+
+            Log.d("counterMainSharedPref", String.valueOf(sharedPreferencesMain.getLong("counterMain", 0)));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
