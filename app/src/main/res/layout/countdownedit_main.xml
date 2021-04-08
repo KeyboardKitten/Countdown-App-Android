@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Select From Public Holiday"
+        android:text="View Public Holiday's (UK)"
         android:id="@+id/buttonAPIHoliday"
         />
 

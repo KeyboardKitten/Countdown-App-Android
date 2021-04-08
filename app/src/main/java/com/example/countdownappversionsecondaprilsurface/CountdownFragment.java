@@ -88,9 +88,8 @@ public class CountdownFragment extends Fragment implements View.OnClickListener 
     Log.d("sharedPreferences hun", sharedPreferences.getString("nameofCountText", "Nowt here"));
 
     eventNameBox.setText(sharedPreferences.getString("nameofCountText", "No Countdown Name entered"));
-//    counterDowner.start(sharedPreferences.getLong("nameOfDate", 0));
     dateDisplayer.setText(sharedPreferences.getString("nameofDate", "No date selected"));
-    Log.d("SharedPref", sharedPreferences.getString("nameofDate", "Nothing here"));
+    Log.d("SharedPref", sharedPreferences.getString("nameofDate", "Nothing date in CountdownFragment Text"));
 
 //    dateDisplayer.setText(nameOfDate.getString("NamerOfDate", "No Date"));
 
