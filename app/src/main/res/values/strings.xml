@@ -12,4 +12,5 @@
     <string name="seconds_instructions">When editing your countdown you can set a name, this will show on the mainscreen to allow you to indetify your countdown. \n \nYou can either select a local date or pick a public holiday provided by Gov.UK. \n \nPressing save will return you back to the countdown view. </string>
     <string name="third_instructions">Selecting \'Local Date Selection\' will allow you to select a date from a dialog, selecting a date will start a countdown from a the current date to your chosen date.</string>
     <string name="name_of_countdown_hint">Name of Countdown</string>
+    <string name="no_countdown">No Countdown entered\n\nPlease press edit in the bottom right to create a countdown. </string>
 </resources>

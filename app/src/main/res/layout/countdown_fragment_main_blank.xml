@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CountdownFragment"
+    android:id="@+id/countdownFragmentBlank">
+
+    <include layout="@layout/countdown_main_no_countdown"/>
+
+    <include layout="@layout/countdownfragment_main"/>
+
+</FrameLayout>

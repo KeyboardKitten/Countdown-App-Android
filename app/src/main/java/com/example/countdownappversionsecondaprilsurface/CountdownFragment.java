@@ -57,10 +57,19 @@ public class CountdownFragment extends Fragment implements View.OnClickListener 
         this.sp = sp;
     }
 
+    private RelativeLayout countdownFilledContainer;
+    private RelativeLayout countdownEmptyContainer;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.countdownfragment_main, container, false);
+
+    this.countdownEmptyContainer = v.findViewById(R.id.countdownBlankFragment);
+    this.countdownFilledContainer = v.findViewById(R.id.CountdownFragmentLayout);
+
+
+
 
     Context mContext= getContext();
 
@@ -132,6 +141,17 @@ public class CountdownFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
 
+    }
+
+
+    private void setBlankUI() {
+        this.countdownEmptyContainer.setVisibility(View.VISIBLE);
+        this.countdownFilledContainer.setVisibility(View.GONE);
+    }
+
+    private void setFilledUI(){
+        this.countdownFilledContainer.setVisibility(View.VISIBLE);
+        this.countdownEmptyContainer.setVisibility(View.GONE);
     }
     }
 
