@@ -16,7 +16,7 @@
             android:id="@+id/fabEditIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit_icon"
+            app:srcCompat="@drawable/ic_edit_icon"
             android:contentDescription="Edit countdown timer"
             android:layout_margin="16dp"
             android:layout_gravity="bottom|right"
