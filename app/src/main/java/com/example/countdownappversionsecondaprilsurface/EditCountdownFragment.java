@@ -85,7 +85,7 @@ public class EditCountdownFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.countdownedit_main, container, false);
 
-        final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
+        final FragmentManager fm = ((AppCompatActivity) getActivity()).getSupportFragmentManager();
         final Context context = getContext();
         if (context == null) return v;
 
@@ -99,23 +99,11 @@ public class EditCountdownFragment extends Fragment {
         AppCompatButton holidayAPIButton = v.findViewById(R.id.buttonAPIHoliday);
         final AppCompatEditText textbox = v.findViewById(R.id.countDownNameEditBox);
 
-
         final CountdownView myCountdownView = v.findViewById(R.id.Counter);
-
-        final String daysCheckBoxTextTrue = getActivity().getResources().getString(R.string.isShowDayString);
-        final String daysCheckBoxTextFalse = getActivity().getResources().getString(R.string.isShowDayString);
 
         editor = getContext().getSharedPreferences("nameofCount", MODE_PRIVATE).edit();
 
 
-
-
-
-
-
-
-
-        getChildFragmentManager();
         // https://developer.android.com/reference/androidx/fragment/app/Fragment#getFragmentManager()
         // Double check Fragment Manager has been removed
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +128,6 @@ public class EditCountdownFragment extends Fragment {
 
                 Log.d("nameofCountText", sharePref.getString("nameofCountText", "nothing"));
 
-
             }
         });
 
@@ -152,58 +139,7 @@ public class EditCountdownFragment extends Fragment {
             }
         });
 
-
-
-
-
         return v;
     }
 
-//    @Override
-//    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.YEAR, year);
-//        calendar.set(Calendar.MONTH, month);
-//        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//
-//
-////        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//
-//        pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-//
-////        sharedPrefs.edit().putString("nameofDate", pickerDateString).apply();
-//
-//
-//        Log.d("pickerDateStringEntry", pickerDateString);
-//
-////        SharedPreferences onDateSetSharedPref = getActivity().getPreferences(context.MODE_PRIVATE);
-////        onDateSetSharedPref.edit().putString("nameofDate", pickerDateString).apply();
-//
-////        SharedPreferences.Editor editorDate = context.getSharedPreferences("nameofDate", MODE_PRIVATE).edit();
-////        editorDate.putString("nameofDate", pickerDateString);
-////        editorDate.apply();
-//
-//
-//        // Valid
-//
-//        try {
-////            dateDisplayer.setText(pickerDateString);
-////            System.out.println("date Displayer " + dateDisplayer);
-//            Date now = new Date();
-//
-//            long currentDate = now.getTime();
-//            System.out.println("Current Date " + currentDate);
-//            long pickerDate = calendar.getTimeInMillis();
-//            System.out.println("Picker Date " + pickerDate);
-//            long countDownToPickerDate = pickerDate - currentDate;
-//            Log.d("Counter", String.valueOf(countDownToPickerDate));
-////            System.out.println("Difference " + countDownToPickerDate);
-////            counterEditor = getActivity().getSharedPreferences("counterDifference", MODE_PRIVATE).edit();
-////            counterEditor.putLong("difference", countDownToPickerDate);
-////            counterEditor.apply();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

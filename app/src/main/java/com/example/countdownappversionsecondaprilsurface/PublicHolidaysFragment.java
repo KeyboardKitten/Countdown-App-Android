@@ -64,7 +64,6 @@ public class PublicHolidaysFragment extends Fragment {
         setLoadingUI();
 
 
-
         requestQueue = Volley.newRequestQueue(getContext());
 
 
@@ -73,7 +72,6 @@ public class PublicHolidaysFragment extends Fragment {
         String url = "https://www.gov.uk/bank-holidays.json";
 
         // THIS WORKS
-
 
 
 //        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -120,7 +118,7 @@ public class PublicHolidaysFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("TEST","onResponse Started");
+                        Log.d("TEST", "onResponse Started");
                         try {
                             JSONObject englandAndWales = response.getJSONObject("england-and-wales");
                             JSONArray eventsJSON = englandAndWales.getJSONArray("events");
@@ -128,9 +126,9 @@ public class PublicHolidaysFragment extends Fragment {
                             for (int i = 0; i < eventsJSON.length(); i++) {
                                 Log.d("viruss", String.valueOf(i));
                                 JSONObject event = eventsJSON.getJSONObject(i);
-                                Log.d("Alex is a sstupid",event.toString());
-                                Log.d("Alex is a ",event.getString("title"));
-                                events.add(event.getString("title") + " " +  event.getString("date"));
+                                Log.d("Alex is a sstupid", event.toString());
+                                Log.d("Alex is a ", event.getString("title"));
+                                events.add(event.getString("title") + " " + event.getString("date"));
                                 String[] eventsArray = new String[events.size()];
                                 eventsArray = events.toArray(eventsArray);
                                 arrayAdapter = new ArrayAdapter<String>(
@@ -140,21 +138,14 @@ public class PublicHolidaysFragment extends Fragment {
                                 );
 
 
-
                                 Log.d("ArrayAdapter", arrayAdapter.toString());
                                 Log.d("ArrayAdapter", listView.toString());
                                 listView.setAdapter(arrayAdapter);
                                 setFetchedUI();
                             }
 
-//                            System.out.println(events);
-//                            int l = events.length();
-//                            for (int i=0; i < l; i++) {
-//                                JSONObject obj = events.getJSONObject(i);
-//                                arrayAdapter.add(obj.getString("title"));
-//                            }
                         } catch (JSONException e) {
-                            Log.d("ERROR","JSON Error");
+                            Log.d("ERROR", "JSON Error");
                             setFailedUI();
                         }
                     }
@@ -164,7 +155,7 @@ public class PublicHolidaysFragment extends Fragment {
         return v;
     }
 
-    private void fetchDataAndUpdateList(String url, Response.Listener<JSONObject> onResponse){
+    private void fetchDataAndUpdateList(String url, Response.Listener<JSONObject> onResponse) {
         JsonObjectRequest exampleRequest = new JsonObjectRequest(Request.Method.GET, url, null, onResponse,
                 new Response.ErrorListener() {
                     @Override
@@ -188,19 +179,19 @@ public class PublicHolidaysFragment extends Fragment {
         super.onPause();
     }
 
-    private void setLoadingUI(){
+    private void setLoadingUI() {
         this.holidayAPILoadingContainer.setVisibility(View.VISIBLE);
         this.holidayFailedContainer.setVisibility(View.GONE);
         this.holidayAPIContainer.setVisibility(View.GONE);
     }
 
-    private void setFetchedUI(){
+    private void setFetchedUI() {
         this.holidayAPIContainer.setVisibility(View.VISIBLE);
         this.holidayFailedContainer.setVisibility(View.GONE);
         this.holidayAPILoadingContainer.setVisibility(View.GONE);
     }
 
-    private void setFailedUI(){
+    private void setFailedUI() {
         this.holidayAPIContainer.setVisibility(View.GONE);
         this.holidayAPILoadingContainer.setVisibility(View.GONE);
         this.holidayFailedContainer.setVisibility(View.VISIBLE);
