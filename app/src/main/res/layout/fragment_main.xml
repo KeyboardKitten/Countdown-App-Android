@@ -7,16 +7,6 @@
     tools:context=".PublicHolidaysFragment"
     tools:showIn="@layout/activity_main">
 
-    <!--
-    Various UI elements are displayed depending on the state of the http request.
-    These have been separated into different layout files for better readability.
-
-    Note, these UI elements are all included here and managed in MainActivityFragment
-    by changing their visibility. This is only for simplicity as the focus of this
-    exercise is on Volley. In larger projects you should consider using and swapping
-    between different Fragments.
-    -->
-
     <include layout="@layout/fragment_holiday_loading"/>
 
     <include layout="@layout/holidayapi_main"/>

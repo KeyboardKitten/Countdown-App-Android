@@ -71,46 +71,6 @@ public class PublicHolidaysFragment extends Fragment {
         // DOCUMENTATION https://www.api.gov.uk/gds/bank-holidays/#bank-holidays
         String url = "https://www.gov.uk/bank-holidays.json";
 
-        // THIS WORKS
-
-
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-//
-//                Request.Method.GET, // Type of request, using GET to get info
-//                url,
-//                null,// url from the gov.uk page
-//                new Response.Listener<JSONObject>() { // When no error this method runs
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        String holidaysPrinted;
-//
-//                        try {
-//                            holidaysPrinted = response.getJSONObject("england-and-wales").getJSONObject("division").getJSONObject("events").getString("title");
-//                            Log.d("HOLIDAYS", response.toString(2));
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            holidaysPrinted = "Unknown";
-//                        }
-//                        listView.(holidaysPrinted);
-//                    }
-//
-//                },
-//
-//
-//
-//                new Response.ErrorListener() { // When there is an error
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        if (error.getMessage() != null) {
-//                            Log.d("ERRORGOVUK", error.getMessage());
-//                        }
-//                    }
-//                }
-//        );
-//
-//        requestQueue.add(jsonObjectRequest);
-
         events = new ArrayList<>();
 
         fetchDataAndUpdateList(
