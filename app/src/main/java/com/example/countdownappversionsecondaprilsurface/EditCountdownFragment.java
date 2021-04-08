@@ -60,12 +60,13 @@ public class EditCountdownFragment extends Fragment implements  DatePickerDialog
     ProgressBar progressBar;
     int count = 0;
     Timer timer;
-    private String pickerDateString;
+    String pickerDateString;
     DatePicker view;
     int year;
     int month;
     int dayOfMonth;
     String selectedDate;
+    SharedPreferences.Editor editor;
 
     private DatePickerDialog.OnDateSetListener datePickerDialog;
 
@@ -102,10 +103,13 @@ public class EditCountdownFragment extends Fragment implements  DatePickerDialog
         final String daysCheckBoxTextTrue = getActivity().getResources().getString(R.string.isShowDayString);
         final String daysCheckBoxTextFalse = getActivity().getResources().getString(R.string.isShowDayString);
 
+        editor = getContext().getSharedPreferences("nameofCount", MODE_PRIVATE).edit();
 //        progressBar = v.findViewById(R.id.progressBar);
 
 
         textbox.setText(sp.getString("textboxText", ""));
+
+
 
         getChildFragmentManager();
         // https://developer.android.com/reference/androidx/fragment/app/Fragment#getFragmentManager()
@@ -186,9 +190,8 @@ public class EditCountdownFragment extends Fragment implements  DatePickerDialog
 //                String textboxContents = textbox.getText().toString();
 //
 //                sp.edit().putString("textboxText", textboxContents).apply();
-                SharedPreferences.Editor editor = getContext().getSharedPreferences("nameofCount", MODE_PRIVATE).edit();
-                editor.putString("nameofCount", textbox.getText().toString());
-                editor.putString("nameofDate", pickerDateString);
+
+                editor.putString("nameofCountText", textbox.getText().toString());
                 editor.apply();
 
 //                eventNameBox.setText(sharedPreferences.getString("nameofCount", "Orange is the new black"));
@@ -224,17 +227,14 @@ public class EditCountdownFragment extends Fragment implements  DatePickerDialog
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-        String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-        System.out.println("pickerDateString "  + pickerDateString);
-
-        SharedPreferences.Editor editor = getContext().getSharedPreferences("nameofCount", MODE_PRIVATE).edit();
-        editor.putString("nameOfDate", pickerDateString);
+        pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        editor.putString("nameofDate", pickerDateString);
         editor.apply();
 
 

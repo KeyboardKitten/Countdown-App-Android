@@ -72,7 +72,7 @@ public class CountdownFragment extends Fragment implements View.OnClickListener 
         }
 
         RelativeLayout ii = (RelativeLayout)inflater.inflate(R.layout.countdownfragment_main, container, false);
-        dateDisplayer = (TextView) ii.findViewById(R.id.dateContext);
+//        dateDisplayer = (TextView) ii.findViewById(R.id.dateContext);
 
 //    v.findViewById(R.id.action_goto_share_countdown).setOnClickListener(this);
 
@@ -85,11 +85,12 @@ public class CountdownFragment extends Fragment implements View.OnClickListener 
 //    SharedPreferences datePreference = getContext().getSharedPreferences("DateDifference", Context.MODE_PRIVATE);
 //    SharedPreferences datePickerCaller = getContext().getSharedPreferences("datePickerTotalString", MODE_PRIVATE);
 
-    Log.d("sharedPreferences hun", sharedPreferences.getString("nameofCount", "Nowt here"));
+    Log.d("sharedPreferences hun", sharedPreferences.getString("nameofCountText", "Nowt here"));
 
-    eventNameBox.setText(sharedPreferences.getString("nameofCount", "No Countdown Name entered"));
+    eventNameBox.setText(sharedPreferences.getString("nameofCountText", "No Countdown Name entered"));
 //    counterDowner.start(sharedPreferences.getLong("nameOfDate", 0));
-    dateDisplayer.setText(sharedPreferences.getString("nameOfDate", "No date selected"));
+    dateDisplayer.setText(sharedPreferences.getString("nameofDate", "No date selected"));
+    Log.d("SharedPref", sharedPreferences.getString("nameofDate", "Nothing here"));
 
 //    dateDisplayer.setText(nameOfDate.getString("NamerOfDate", "No Date"));
 
