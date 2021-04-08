@@ -272,7 +272,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-        SharedPreferences sharedPreferencesMain = PreferenceManager.getDefaultSharedPreferences(this);
+//        SharedPreferences sharedPreferencesMain = PreferenceManager.getDefaultSharedPreferences(this);
+
+        SharedPreferences sharedPreferencesMain = this.getSharedPreferences("mainActSharedPref", Context.MODE_PRIVATE);
 
         String pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
 

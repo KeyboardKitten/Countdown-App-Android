@@ -82,13 +82,14 @@ public class CountdownFragment extends Fragment implements View.OnClickListener 
     dateDisplayer = v.findViewById(R.id.dateContext);
 
     SharedPreferences sharedPreferences = getContext().getSharedPreferences("nameofCount", Context.MODE_PRIVATE);
+    SharedPreferences sharedPreferencesMain = getContext().getSharedPreferences("mainActSharedPref", MODE_PRIVATE);
 //    SharedPreferences datePreference = getContext().getSharedPreferences("DateDifference", Context.MODE_PRIVATE);
 //    SharedPreferences datePickerCaller = getContext().getSharedPreferences("datePickerTotalString", MODE_PRIVATE);
 
     Log.d("sharedPreferences hun", sharedPreferences.getString("nameofCountText", "Nowt here"));
 
     eventNameBox.setText(sharedPreferences.getString("nameofCountText", "No Countdown Name entered"));
-    dateDisplayer.setText(sharedPreferences.getString("nameofDate", "No date selected"));
+    dateDisplayer.setText(sharedPreferencesMain.getString("nameofDate", "No date selected"));
     Log.d("SharedPref", sharedPreferences.getString("nameofDate", "Nothing date in CountdownFragment Text"));
 
 //    dateDisplayer.setText(nameOfDate.getString("NamerOfDate", "No Date"));
@@ -127,10 +128,9 @@ public class CountdownFragment extends Fragment implements View.OnClickListener 
 
 
 
-    SharedPreferences prefs = getContext().getSharedPreferences("counterDifference", Context.MODE_PRIVATE);
-    Long counterOnCreate = prefs.getLong("difference", 0);
+    Long counterOnCreate = sharedPreferencesMain.getLong("counterMain", 0);
 
-    Log.d("Counter", String.valueOf(counterOnCreate));
+    Log.d("Counter Countdown Frag", String.valueOf(counterOnCreate));
 
     counterDowner.start(counterOnCreate);
 
