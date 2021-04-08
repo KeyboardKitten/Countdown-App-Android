@@ -161,15 +161,24 @@ public class EditCountdownFragment extends Fragment implements  DatePickerDialog
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
-        final Context context = getContext();
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
 
+//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         pickerDateString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+//        sharedPrefs.edit().putString("nameofDate", pickerDateString).apply();
+
+
+        Log.d("pickerDateStringEntry", pickerDateString);
+
+//        SharedPreferences onDateSetSharedPref = getActivity().getPreferences(context.MODE_PRIVATE);
+//        onDateSetSharedPref.edit().putString("nameofDate", pickerDateString).apply();
+
 //        SharedPreferences.Editor editorDate = context.getSharedPreferences("nameofDate", MODE_PRIVATE).edit();
 //        editorDate.putString("nameofDate", pickerDateString);
 //        editorDate.apply();
