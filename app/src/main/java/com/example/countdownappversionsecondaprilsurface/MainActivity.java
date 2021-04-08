@@ -13,6 +13,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +28,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener {
 
+    private static final String GOV_UK = "https://www.gov.uk/bank-holidays";
+
     private DrawerLayout drawerLayout;
 
     @Override
@@ -36,15 +39,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.action_goto_share_countdown:
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, "Testing ana oop");
-                intent.setType("text/plain");
-                break;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_goto_view_public_holidays) {
+            this.startActivity(new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(GOV_UK)
+            ));
+            return true;
         }
+//        if (id == R.id.action_goto_share_countdown) {
+//            Intent intent = new Intent();
+//            this.startActivity(new Intent(
+//            // Send some data elsewhere.
+//            intent.setAction(Intent.ACTION_SEND);
+//            // Add the data we want to send
+//            intent.setType("text/plain");
+//            intent.putExtra(Intent.EXTRA_TEXT, "Some text to send somewhere");
+//            intent.putExtra(Intent.EXTRA_EMAIL, "test@test.com");
+//            startActivity(intent);
+//            ));
+//            return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 
