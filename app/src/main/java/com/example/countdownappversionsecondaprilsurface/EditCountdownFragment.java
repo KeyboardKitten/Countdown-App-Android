@@ -18,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -119,6 +120,9 @@ public class EditCountdownFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (textbox.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "Please enter a name for the countdown", Toast.LENGTH_SHORT).show();
+                } else {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.changeFragment(new CountdownFragment(sp), "Countdown Fragment");
                 editor.putString("nameofCountText", textbox.getText().toString());
@@ -127,7 +131,7 @@ public class EditCountdownFragment extends Fragment {
                 textbox.setText(sharePref.getString("nameofCountText", ""));
 
                 Log.d("nameofCountText", sharePref.getString("nameofCountText", "nothing"));
-
+                }
             }
         });
 
