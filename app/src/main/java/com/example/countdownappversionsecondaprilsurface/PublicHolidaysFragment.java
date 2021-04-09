@@ -82,12 +82,12 @@ public class PublicHolidaysFragment extends Fragment {
                         try {
                             JSONObject englandAndWales = response.getJSONObject("england-and-wales");
                             JSONArray eventsJSON = englandAndWales.getJSONArray("events");
-                            Log.d("jsonnn derulo", String.valueOf(eventsJSON));
+                            Log.d("First Holiday Call ", String.valueOf(eventsJSON));
                             for (int i = 0; i < eventsJSON.length(); i++) {
-                                Log.d("viruss", String.valueOf(i));
+                                Log.d("Second Holiday Call ", String.valueOf(i));
                                 JSONObject event = eventsJSON.getJSONObject(i);
-                                Log.d("Alex is a sstupid", event.toString());
-                                Log.d("Alex is a ", event.getString("title"));
+                                Log.d("Third Holiday Call ", event.toString());
+                                Log.d("Fourth Holiday Call ", event.getString("title"));
                                 events.add(event.getString("title") + " " + event.getString("date"));
                                 String[] eventsArray = new String[events.size()];
                                 eventsArray = events.toArray(eventsArray);
