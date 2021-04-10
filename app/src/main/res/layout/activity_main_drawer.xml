@@ -10,14 +10,6 @@
 
     <include layout="@layout/activity_main" />
 
-    <!-- TODO(10)
-    Note that as well as having a DrawerLayout, we also need a NavigationView element, which
-    is the actual menu. See the lecture slides for more information, or the documentation.
-
-    Importantly, as well as styling attributes, this element has two elements that define the
-    layout to use as the "header" above the list of menu items (see layout/activity_main_drawer.xml).
-    Additionally, it also defines the menu resource to use (see menu/activity_main_drawer.xml).
-    -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

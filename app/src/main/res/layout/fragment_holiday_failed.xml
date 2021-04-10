@@ -20,5 +20,5 @@
         android:id="@+id/holidayAPI_fetching_failed_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cant fetch public holidays, check your internet connection."/>
+        android:text="@string/default_error_message_holidays"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

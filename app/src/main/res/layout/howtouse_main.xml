@@ -8,7 +8,7 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".HowToUseFragment"
     android:id="@+id/howToUseFragment">
 
@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="How to Use"
+            android:text="@string/how_to_use_text"
             android:textSize="36sp"
             android:textAlignment="center"
             android:layout_gravity="center_horizontal" />
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Homescreen"
+            android:text="@string/homescreen"
             android:textSize="30sp"
             />
 
@@ -69,7 +69,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Countdown Screen"
+                android:text="@string/edit_countdown_screen_string"
                 android:textSize="30sp" />
 
             <TextView
@@ -81,7 +81,7 @@
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-                android:layout_height="419dp"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@drawable/editcountdownimage" />
 
@@ -101,7 +101,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date selection"
+                android:text="@string/date_selection_text_howto"
                 android:textSize="30sp"
             />
 

@@ -8,10 +8,6 @@
     android:visibility="gone"
     android:orientation="vertical">
 
-    <!--
-    This element is a loading graphic that is shown while the request is occurred, but has not
-    returned
-    -->
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"
         android:layout_gravity="center"
@@ -25,5 +21,7 @@
         android:id="@+id/FetchingHolidayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fetching public holidays from GOV.UK"/>
+        android:text="@string/loading_holidays_text"
+    />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

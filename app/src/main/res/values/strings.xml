@@ -13,4 +13,18 @@
     <string name="third_instructions">Selecting \'Local Date Selection\' will allow you to select a date from a dialog, selecting a date will start a countdown from a the current date to your chosen date.</string>
     <string name="name_of_countdown_hint">Name of Countdown</string>
     <string name="no_countdown">No Countdown entered\n\nPlease press edit in the bottom right to create a countdown. </string>
+    <string name="material_edit_countdown_textbox">Edit Countdown</string>
+    <string name="date_selection_text">Date Selection</string>
+    <string name="local_date_selection_button">Local Date Selection</string>
+    <string name="view_public_holiday_button">View Public Holiday\'s (UK)</string>
+    <string name="save_button">Save</string>
+    <string name="edit_countdown_timer_description">Edit countdown timer</string>
+    <string name="counting_down_till_mainpage_nochange">Counting down till</string>
+    <string name="default_error_message_holidays">Cant fetch public holidays, check your internet connection.</string>
+    <string name="loading_holidays_text">Fetching public holidays from GOV.UK</string>
+    <string name="how_to_use_text">How to Use</string>
+    <string name="homescreen">Homescreen</string>
+    <string name="edit_countdown_screen_string">Edit Countdown Screen</string>
+    <string name="date_selection_text_howto">Date selection</string>
+    <string name="top_bar_text">Countdown App - Navigation</string>
 </resources>

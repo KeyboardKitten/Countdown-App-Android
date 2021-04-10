@@ -13,24 +13,10 @@
         android:orientation="vertical"
         android:padding="24dp" >
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:id="@+id/outlinedTextField"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="label"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                />-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Countdown"
+        android:text="@string/material_edit_countdown_textbox"
         android:textSize="30sp"
         android:textAlignment="center"
         android:layout_gravity="center_horizontal" />
@@ -61,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Date Selection"
+            android:text="@string/date_selection_text"
             android:textAlignment="center"
             android:textSize="25sp" />
 
@@ -72,16 +58,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Local Date Selection"
+        android:text="@string/local_date_selection_button"
         android:id="@+id/buttonDatePicker"
         />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="View Public Holiday's (UK)"
+        android:text="@string/view_public_holiday_button"
         android:id="@+id/buttonAPIHoliday"
         />
 
@@ -89,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/countdownEditSaveBUtton"
-        android:text="Save"
+        android:text="@string/save_button"
         android:textSize="22sp"
         />
 

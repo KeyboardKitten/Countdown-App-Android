@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_edit_icon"
-            android:contentDescription="Edit countdown timer"
+            android:contentDescription="@string/edit_countdown_timer_description"
             android:layout_margin="16dp"
             android:layout_gravity="bottom|right"
             app:backgroundTint="@color/colorAccent"
@@ -38,7 +38,7 @@
         android:id="@+id/nameOfEventTextBox"
         />
 
-
+<!--REFERENCE https://github.com/iwgang/CountdownView -->
     <cn.iwgang.countdownview.CountdownView
         android:id="@+id/Counter"
         android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Counting down till"
+        android:text="@string/counting_down_till_mainpage_nochange"
         android:layout_below="@+id/Counter"
         android:layout_centerInParent="true"
         android:id="@+id/countingDownText"
