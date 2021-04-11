@@ -96,14 +96,11 @@ public class PublicHolidaysFragment extends Fragment {
                                         android.R.layout.simple_list_item_1,
                                         eventsArray
                                 );
-
-
                                 Log.d("ArrayAdapter", arrayAdapter.toString());
                                 Log.d("ArrayAdapter", listView.toString());
                                 listView.setAdapter(arrayAdapter);
                                 setFetchedUI();
                             }
-
                         } catch (JSONException e) {
                             Log.d("ERROR", "JSON Error");
                             setFailedUI();
