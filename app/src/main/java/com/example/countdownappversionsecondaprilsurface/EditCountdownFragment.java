@@ -49,28 +49,9 @@ public class EditCountdownFragment extends Fragment {
 
     SharedPreferences sp;
     SharedPreferences sharePref;
-    AppCompatEditText textbox;
     private TextView eventNameBox;
-    TextView tvDatePickerEdit;
-    CountdownView myCountdownView;
-    CheckBox DaysCheckBox;
-    CheckBox HoursCheckBox;
-    CheckBox MinutesCheckBox;
-    CheckBox SecondsCheckBox;
-    CheckBox MillisecondsCheckBox;
-    String DaysTextCheckBox;
-    ProgressBar progressBar;
-    int count = 0;
-    Timer timer;
     String pickerDateString;
-    DatePicker view;
-    int year;
-    int month;
-    int dayOfMonth;
-    String selectedDate;
     SharedPreferences.Editor editor;
-
-    private DatePickerDialog.OnDateSetListener datePickerDialog;
 
     public EditCountdownFragment() {
         // Empty

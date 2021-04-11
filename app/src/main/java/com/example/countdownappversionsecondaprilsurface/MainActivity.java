@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
 
+    Intent intent = null;
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -39,14 +42,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+
+
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_goto_view_public_holidays) {
-            this.startActivity(new Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(GOV_UK)
-            ));
-            return true;
+        switch (item.getItemId()){
+            case R.id.action_goto_share_countdown:
+                        intent = new Intent(Intent.ACTION_SEND);
+                        intent.putExtra(Intent.EXTRA_TEXT, "Hello");
+                        intent.setType("text/plain");
+                return true;
+            case R.id.action_goto_view_public_holidays:
+                this.startActivity(new Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(GOV_UK)
+                ));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+//        int id = item.getItemId();
+//        if (id == R.id.action_goto_view_public_holidays) {
+//            this.startActivity(new Intent(
+//                    Intent.ACTION_VIEW,
+//                    Uri.parse(GOV_UK)
+//            ));
+//            return true;
         }
 //        if (id == R.id.action_goto_share_countdown) {
 //            Intent intent = new Intent();
@@ -61,8 +81,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            ));
 //            return true;
 //        }
-        return super.onOptionsItemSelected(item);
-    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,13 +181,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            System.out.println("date Displayer " + dateDisplayer);
             Date now = new Date();
 
-            long currentDate = now.getTime();
-            System.out.println("Current Date " + currentDate);
-            long pickerDate = calendar.getTimeInMillis();
-            System.out.println("Picker Date " + pickerDate);
-            long countDownToPickerDate = pickerDate - currentDate;
-            Log.d("Counter", String.valueOf(countDownToPickerDate));
-            sharedPreferencesMain.edit().putLong("counterMain", countDownToPickerDate).apply();
+            long currentDateLocal = now.getTime();
+            System.out.println("Current Date " + currentDateLocal);
+            long pickedDateDialog = calendar.getTimeInMillis();
+            System.out.println("Picker Date " + pickedDateDialog);
+            long differenceBetweenDates = pickedDateDialog - currentDateLocal;
+            Log.d("Counter", String.valueOf(differenceBetweenDates));
+            sharedPreferencesMain.edit().putLong("counterMain", differenceBetweenDates).apply();
 
             Log.d("counterMainSharedPref", String.valueOf(sharedPreferencesMain.getLong("counterMain", 0)));
 
