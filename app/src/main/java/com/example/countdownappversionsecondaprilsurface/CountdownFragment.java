@@ -42,56 +42,56 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class CountdownFragment extends Fragment implements View.OnClickListener {
 
-    private String daysCheck;
-    private TextView eventNameBox;
-    private SharedPreferences sp;
-    TextView dateDisplayer;
-    CountdownView counterDowner;
-    SharedPreferences.Editor counterEditor;
+private String daysCheck;
+private TextView eventNameBox;
+private SharedPreferences sp;
+        TextView dateDisplayer;
+        CountdownView counterDowner;
+        SharedPreferences.Editor counterEditor;
 
-    public CountdownFragment(SharedPreferences sp) {
+public CountdownFragment(SharedPreferences sp) {
         this.sp = sp;
-    }
+        }
 
-    public CountdownFragment() {
+public CountdownFragment() {
         this.sp = sp;
-    }
+        }
 
-    private RelativeLayout countdownFilledContainer;
-    private RelativeLayout countdownEmptyContainer;
+private RelativeLayout countdownFilledContainer;
+private RelativeLayout countdownEmptyContainer;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View v = inflater.inflate(R.layout.countdownfragment_main, container, false);
+@Nullable
+@Override
+public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.countdownfragment_main, container, false);
 
-    this.countdownEmptyContainer = v.findViewById(R.id.countdownBlankFragment);
-    this.countdownFilledContainer = v.findViewById(R.id.CountdownFragmentLayout);
-
-
+        this.countdownEmptyContainer = v.findViewById(R.id.countdownBlankFragment);
+        this.countdownFilledContainer = v.findViewById(R.id.CountdownFragmentLayout);
 
 
-    Context mContext= getContext();
+
+
+        Context mContext= getContext();
 
         if (container == null) {
-            return null;
+        return null;
         }
 
         RelativeLayout ii = (RelativeLayout)inflater.inflate(R.layout.countdownfragment_main, container, false);
 
-    daysCheck = getString(R.string.isShowDayString);
-    eventNameBox = v.findViewById(R.id.nameOfEventTextBox);
-    counterDowner = v.findViewById(R.id.Counter);
-    dateDisplayer = v.findViewById(R.id.dateContext);
+        daysCheck = getString(R.string.isShowDayString);
+        eventNameBox = v.findViewById(R.id.nameOfEventTextBox);
+        counterDowner = v.findViewById(R.id.Counter);
+        dateDisplayer = v.findViewById(R.id.dateContext);
 
-    SharedPreferences sharedPreferences = getContext().getSharedPreferences("nameofCount", Context.MODE_PRIVATE);
-    SharedPreferences sharedPreferencesMain = getContext().getSharedPreferences("mainActSharedPref", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("nameofCount", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferencesMain = getContext().getSharedPreferences("mainActSharedPref", MODE_PRIVATE);
 
-    Log.d("sharedPreferences hun", sharedPreferences.getString("nameofCountText", "Nowt here"));
+        Log.d("sharedPreferences hun", sharedPreferences.getString("nameofCountText", "Nowt here"));
 
-    eventNameBox.setText(sharedPreferences.getString("nameofCountText", "No Countdown Name entered"));
-    dateDisplayer.setText(sharedPreferencesMain.getString("nameofDate", "No date selected"));
-    Log.d("SharedPref", sharedPreferences.getString("nameofDate", "Nothing date in CountdownFragment Text"));
+        eventNameBox.setText(sharedPreferences.getString("nameofCountText", "No Countdown Name entered"));
+        dateDisplayer.setText(sharedPreferencesMain.getString("nameofDate", "No date selected"));
+        Log.d("SharedPref", sharedPreferences.getString("nameofDate", "Nothing date in CountdownFragment Text"));
 
 //    dateDisplayer.setText(nameOfDate.getString("NamerOfDate", "No Date"));
 
@@ -112,47 +112,46 @@ public class CountdownFragment extends Fragment implements View.OnClickListener 
 //    System.out.println("Apple " + counterDowner);
 
 
-    
+
 
 //    onCheckboxClicked(v);
 
-    FloatingActionButton fabEditButton = v.findViewById(R.id.fabEditIcon);
+        FloatingActionButton fabEditButton = v.findViewById(R.id.fabEditIcon);
 
-    fabEditButton.setOnClickListener(new View.OnClickListener() {
+        fabEditButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            MainActivity mainActivity = (MainActivity) getActivity();
-            mainActivity.changeFragment(new EditCountdownFragment(), "edit countdown");
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.changeFragment(new EditCountdownFragment(), "edit countdown");
+        }
+        });
+
+
+
+        Long counterOnCreate = sharedPreferencesMain.getLong("counterMain", 0);
+
+        Log.d("Counter Countdown Frag", String.valueOf(counterOnCreate));
+
+        counterDowner.start(counterOnCreate);
+
+        return v;
+        }
+
+@Override
+public void onClick(View v) {
 
         }
-    });
 
 
-
-    Long counterOnCreate = sharedPreferencesMain.getLong("counterMain", 0);
-
-    Log.d("Counter Countdown Frag", String.valueOf(counterOnCreate));
-
-    counterDowner.start(counterOnCreate);
-
-    return v;
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-
-    private void setBlankUI() {
+private void setBlankUI() {
         this.countdownEmptyContainer.setVisibility(View.VISIBLE);
         this.countdownFilledContainer.setVisibility(View.GONE);
-    }
+        }
 
-    private void setFilledUI(){
+private void setFilledUI(){
         this.countdownFilledContainer.setVisibility(View.VISIBLE);
         this.countdownEmptyContainer.setVisibility(View.GONE);
-    }
+        }
     }
 
 
