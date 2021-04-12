@@ -36,6 +36,7 @@
         android:gravity="center_horizontal"
         android:textSize="@dimen/mainActivityHeaders"
         android:id="@+id/nameOfEventTextBox"
+        android:textStyle="bold"
         />
 
 <!--REFERENCE https://github.com/iwgang/CountdownView -->
@@ -79,6 +80,7 @@
         android:layout_below="@+id/countingDownText"
         android:layout_centerInParent="true"
         android:textSize="@dimen/mainActivityHeaders"
+        android:textStyle="bold"
         />
 
 
