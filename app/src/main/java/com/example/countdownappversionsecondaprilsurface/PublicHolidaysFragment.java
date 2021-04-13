@@ -1,11 +1,14 @@
 package com.example.countdownappversionsecondaprilsurface;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -31,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class PublicHolidaysFragment extends Fragment {
 
@@ -38,6 +42,7 @@ public class PublicHolidaysFragment extends Fragment {
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> events;
+    private HashSet hs;
 
 
     private LinearLayoutCompat holidayAPILoadingContainer;
@@ -46,6 +51,8 @@ public class PublicHolidaysFragment extends Fragment {
     private LinearLayoutCompat holidayFailedContainer;
 
     private RelativeLayout holidayAPIContainer;
+
+    private ClipData myClip;
 
     @Nullable
     @Override
@@ -72,6 +79,7 @@ public class PublicHolidaysFragment extends Fragment {
         String url = "https://www.gov.uk/bank-holidays.json";
 
         events = new ArrayList<>();
+        hs = new HashSet();
 
         fetchDataAndUpdateList(
                 url,
@@ -88,7 +96,12 @@ public class PublicHolidaysFragment extends Fragment {
                                 JSONObject event = eventsJSON.getJSONObject(i);
                                 Log.d("Third Holiday Call ", event.toString());
                                 Log.d("Fourth Holiday Call ", event.getString("title"));
-                                events.add(event.getString("title") + " " + event.getString("date"));
+                                events.add(event.getString("title"));
+//                                REFERENCE https://stackoverflow.com/questions/7633742/removing-duplicates-from-listview-android
+//                                Removing dupes from list
+                                hs.add(events);
+                                events.clear();
+                                events.addAll(hs);
                                 String[] eventsArray = new String[events.size()];
                                 eventsArray = events.toArray(eventsArray);
                                 arrayAdapter = new ArrayAdapter<String>(
@@ -108,12 +121,24 @@ public class PublicHolidaysFragment extends Fragment {
                     }
                 });
 
+        // REFERENCE https://stackoverflow.com/a/39763474
+        final ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String text = "hello world";
+                myClip = ClipData.newPlainText("text", text);
+                clipboardManager.setPrimaryClip(myClip);
+                return true;
+            }
+
+        });
 
         return v;
     }
 
     private void fetchDataAndUpdateList(String url, Response.Listener<JSONObject> onResponse) {
-        JsonObjectRequest exampleRequest = new JsonObjectRequest(Request.Method.GET, url, null, onResponse,
+        JsonObjectRequest onErrorRequest = new JsonObjectRequest(Request.Method.GET, url, null, onResponse,
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -121,7 +146,7 @@ public class PublicHolidaysFragment extends Fragment {
                         setFailedUI();
                     }
                 });
-        requestQueue.add(exampleRequest);
+        requestQueue.add(onErrorRequest);
     }
 
     @Override
@@ -135,6 +160,8 @@ public class PublicHolidaysFragment extends Fragment {
         requestQueue.stop();
         super.onPause();
     }
+
+//    Progress bar UI replacements
 
     private void setLoadingUI() {
         this.holidayAPILoadingContainer.setVisibility(View.VISIBLE);
