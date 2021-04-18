@@ -80,6 +80,13 @@ public class PublicHolidaysFragment extends Fragment {
 
         events = new ArrayList<>();
         hs = new HashSet();
+        String[] eventsArray = new String[events.size()];
+        eventsArray = events.toArray(eventsArray);
+        arrayAdapter = new ArrayAdapter<String>(
+                getContext(),
+                android.R.layout.simple_list_item_1,
+                eventsArray
+        );
 
         fetchDataAndUpdateList(
                 url,
@@ -99,21 +106,15 @@ public class PublicHolidaysFragment extends Fragment {
                                 events.add(event.getString("title"));
 //                                REFERENCE https://stackoverflow.com/questions/7633742/removing-duplicates-from-listview-android
 //                                Removing dupes from list
-                                hs.add(events);
-                                events.clear();
-                                events.addAll(hs);
-                                String[] eventsArray = new String[events.size()];
-                                eventsArray = events.toArray(eventsArray);
-                                arrayAdapter = new ArrayAdapter<String>(
-                                        getContext(),
-                                        android.R.layout.simple_list_item_1,
-                                        eventsArray
-                                );
-                                Log.d("ArrayAdapter", arrayAdapter.toString());
-                                Log.d("ArrayAdapter", listView.toString());
-                                listView.setAdapter(arrayAdapter);
-                                setFetchedUI();
+//                                Myabe move this outside the for loop
                             }
+                            hs.add(events);
+                            events.clear();
+                            events.addAll(hs);
+                            Log.d("ArrayAdapter", arrayAdapter.toString());
+                            Log.d("ArrayAdapter", listView.toString());
+                            listView.setAdapter(arrayAdapter);
+                            setFetchedUI();
                         } catch (JSONException e) {
                             Log.d("ERROR", "JSON Error");
                             setFailedUI();
