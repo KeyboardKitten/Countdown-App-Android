@@ -127,8 +127,7 @@ public class PublicHolidaysFragment extends Fragment {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                String text = "hello world";
-                myClip = ClipData.newPlainText("text", text);
+                myClip = ClipData.newPlainText("text", events.get(position));
                 clipboardManager.setPrimaryClip(myClip);
                 return true;
             }
