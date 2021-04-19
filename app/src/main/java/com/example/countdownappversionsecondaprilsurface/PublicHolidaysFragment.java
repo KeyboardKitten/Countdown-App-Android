@@ -150,17 +150,17 @@ public class PublicHolidaysFragment extends Fragment {
         requestQueue.add(onErrorRequest);
     }
 
-    @Override
-    public void onResume() {
-        requestQueue.start();
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        requestQueue.stop();
-        super.onPause();
-    }
+//    @Override
+//    public void onResume() {
+//        requestQueue.start();
+//        super.onResume();
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        requestQueue.stop();
+//        super.onPause();
+//    }
 
 //    Progress bar UI replacements
 
