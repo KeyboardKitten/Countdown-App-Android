@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
 
-    Intent intent = null;
+    Intent intent;
 
 
     @Override
@@ -45,11 +45,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()){
             case R.id.action_goto_share_countdown:
                         intent = new Intent(Intent.ACTION_SEND);
                         intent.putExtra(Intent.EXTRA_TEXT, "Hello");
                         intent.setType("text/plain");
+
+                        this.startActivity(intent);
                 return true;
             case R.id.action_goto_view_public_holidays:
                 this.startActivity(new Intent(

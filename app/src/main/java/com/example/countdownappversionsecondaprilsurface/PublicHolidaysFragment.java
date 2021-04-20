@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -79,14 +80,12 @@ public class PublicHolidaysFragment extends Fragment {
         String url = "https://www.gov.uk/bank-holidays.json";
 
         events = new ArrayList<>();
-        hs = new HashSet();
-        String[] eventsArray = new String[events.size()];
-        eventsArray = events.toArray(eventsArray);
         arrayAdapter = new ArrayAdapter<String>(
                 getContext(),
                 android.R.layout.simple_list_item_1,
-                eventsArray
+                events
         );
+        listView.setAdapter(arrayAdapter);
 
         fetchDataAndUpdateList(
                 url,
@@ -98,23 +97,20 @@ public class PublicHolidaysFragment extends Fragment {
                             JSONObject englandAndWales = response.getJSONObject("england-and-wales");
                             JSONArray eventsJSON = englandAndWales.getJSONArray("events");
                             Log.d("First Holiday Call ", String.valueOf(eventsJSON));
+
+                            String name = "";
                             for (int i = 0; i < eventsJSON.length(); i++) {
                                 Log.d("Second Holiday Call ", String.valueOf(i));
                                 JSONObject event = eventsJSON.getJSONObject(i);
-                                Log.d("Third Holiday Call ", event.toString());
-                                Log.d("Fourth Holiday Call ", event.getString("title"));
-                                events.add(event.getString("title"));
-//                                REFERENCE https://stackoverflow.com/questions/7633742/removing-duplicates-from-listview-android
-//                                Removing dupes from list
-//                                Myabe move this outside the for loop
+                                name = event.getString("title");
+
+                                if (!events.contains(name)){
+                                    events.add(name);
+                                }
                             }
-                            hs.add(events);
-                            events.clear();
-                            events.addAll(hs);
-                            Log.d("ArrayAdapter", arrayAdapter.toString());
-                            Log.d("ArrayAdapter", listView.toString());
-                            listView.setAdapter(arrayAdapter);
                             setFetchedUI();
+                            Toast.makeText(getActivity(), "Tip! Long Press on a public holiday to copy to clipboard!", Toast.LENGTH_LONG).show();
+
                         } catch (JSONException e) {
                             Log.d("ERROR", "JSON Error");
                             setFailedUI();
@@ -129,6 +125,7 @@ public class PublicHolidaysFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 myClip = ClipData.newPlainText("text", events.get(position));
                 clipboardManager.setPrimaryClip(myClip);
+                Toast.makeText(getActivity(), "Public Holiday " + events.get(position) + " copied!", Toast.LENGTH_LONG).show();
                 return true;
             }
 
