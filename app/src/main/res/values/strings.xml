@@ -25,6 +25,8 @@
     <string name="how_to_use_text">How to Use</string>
     <string name="homescreen">Homescreen</string>
     <string name="edit_countdown_screen_string">Edit Countdown Screen</string>
-    <string name="date_selection_text_howto">Date selection</string>
+    <string name="date_selection_text_howto">Local Date Selection</string>
     <string name="top_bar_text">Countdown App - Navigation</string>
+    <string name="public_holidays_howto_text">Public Holiday Selection</string>
+    <string name="fourth_instructions">Using the GOV.UK Public Web API, a list of current UK holidays will appear on the screen\n\nLong pressing on one of these dates will copy the event selected to the clipboard, allowing you to enter it into the event name on the Edit Countdown screen.</string>
 </resources>
