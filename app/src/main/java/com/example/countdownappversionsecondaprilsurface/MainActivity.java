@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Intent intent;
 
+    SharedPreferences sharedPreferencesName = this.getSharedPreferences("nameofCount", MODE_PRIVATE);
+    SharedPreferences sharedPreferencesDate = this.getSharedPreferences("mainActSharedPref", MODE_PRIVATE);
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -49,9 +56,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()){
             case R.id.action_goto_share_countdown:
                         intent = new Intent(Intent.ACTION_SEND);
-                        intent.putExtra(Intent.EXTRA_TEXT, "Hello");
+                        intent.putExtra(Intent.EXTRA_TEXT, "Hey! Let's countdown to an event together using The Countdown App!");
                         intent.setType("text/plain");
-
                         this.startActivity(intent);
                 return true;
             case R.id.action_goto_view_public_holidays:
@@ -63,27 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             default:
                 return super.onOptionsItemSelected(item);
         }
-//        int id = item.getItemId();
-//        if (id == R.id.action_goto_view_public_holidays) {
-//            this.startActivity(new Intent(
-//                    Intent.ACTION_VIEW,
-//                    Uri.parse(GOV_UK)
-//            ));
-//            return true;
         }
-//        if (id == R.id.action_goto_share_countdown) {
-//            Intent intent = new Intent();
-//            this.startActivity(new Intent(
-//            // Send some data elsewhere.
-//            intent.setAction(Intent.ACTION_SEND);
-//            // Add the data we want to send
-//            intent.setType("text/plain");
-//            intent.putExtra(Intent.EXTRA_TEXT, "Some text to send somewhere");
-//            intent.putExtra(Intent.EXTRA_EMAIL, "test@test.com");
-//            startActivity(intent);
-//            ));
-//            return true;
-//        }
+
 
 
 
@@ -92,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         Toolbar toolbar = findViewById(R.id.mainToolBar);
         setSupportActionBar(toolbar);
