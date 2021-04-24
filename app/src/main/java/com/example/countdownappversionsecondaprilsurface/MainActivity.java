@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Intent intent;
 
-    SharedPreferences sharedPreferencesName = this.getSharedPreferences("nameofCount", MODE_PRIVATE);
-    SharedPreferences sharedPreferencesDate = this.getSharedPreferences("mainActSharedPref", MODE_PRIVATE);
+//    SharedPreferences sharedPreferencesName = this.getSharedPreferences("nameofCount", MODE_PRIVATE);
+//    SharedPreferences sharedPreferencesDate = this.getSharedPreferences("mainActSharedPref", MODE_PRIVATE);
 
 
 
