@@ -146,6 +146,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
+    // REFERENCE https://developer.android.com/reference/android/app/DatePickerDialog.OnDateSetListener
+    // Using onDateSetListener to listen for when a date has been set using the dialog, implemented at top
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar calendar = Calendar.getInstance();
@@ -169,8 +171,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Valid
 
         try {
-//            dateDisplayer.setText(pickerDateString);
-//            System.out.println("date Displayer " + dateDisplayer);
             Date now = new Date();
 
             long currentDateLocal = now.getTime();

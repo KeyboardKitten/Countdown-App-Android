@@ -92,6 +92,7 @@ public class EditCountdownFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
+                // REFERENCE https://stackoverflow.com/a/14775322 using a child fragment instead of a standard fragment manager
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getChildFragmentManager(), "date picker");
             }
